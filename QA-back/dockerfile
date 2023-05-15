@@ -1,0 +1,16 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /app
+
+# Copier les fichiers de projet et restaurer les dépendances
+COPY *.csproj .
+RUN dotnet restore
+
+# Copier et construire l'application
+COPY . .
+RUN dotnet publish -c Release -o out
+
+# Exposer le port d'écoute de l'application
+EXPOSE 80
+
+# Définir la commande de démarrage de l'application
+ENTRYPOINT ["dotnet", "out/YourApp.dll"]
