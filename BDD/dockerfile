@@ -14,4 +14,7 @@ ENV MYSQL_USER=myuser
 ENV MYSQL_PASSWORD=mypassword
 
 # Commande de démarrage du conteneur
-CMD ["mysqld"]
+FROM mariadb:latest
+
+# Copier le script SQL d'initialisation de la base de données dans le conteneur
+COPY init.sql /docker-entrypoint-initdb.d/

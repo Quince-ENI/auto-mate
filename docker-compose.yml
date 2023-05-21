@@ -1,0 +1,35 @@
+version: '3'
+services:
+  front:
+    build:
+      context: ./QA-front
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - back
+
+  back:
+    build:
+      context: ./QA-back
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    depends_on:
+      - db
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Port=3306;Database=yourdatabase;User=yourusername;Password=yourpassword
+
+  db:
+    build:
+      context: ./BDD
+      dockerfile: Dockerfile
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=yourpassword
+      - MYSQL_DATABASE=yourdatabase
+      - MYSQL_USER=yourusername
+      - MYSQL_PASSWORD=yourpassword
+    volumes:
+      - ./BDD/data:/var/lib/mysql
