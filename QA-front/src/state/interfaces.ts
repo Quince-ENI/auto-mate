@@ -3,7 +3,7 @@ interface AutoMateUiState {
 }
 
 interface AutoMateEntitiesState {
-  carName: string
+  user: boolean
 }
 
 export interface AutoMateState {

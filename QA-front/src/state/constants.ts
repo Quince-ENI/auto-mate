@@ -5,6 +5,6 @@ export const INITIAL_STATE: AutoMateState = {
     filter: "test",
   },
   entities: {
-    carName: "clio",
+    user: false,
   },
 }

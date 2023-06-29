@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom"
 import { Layout, Menu } from "antd"
 import { ItemType } from "antd/lib/menu/hooks/useItems"
-import AutoMatelogo from "../../app/assets/AutoMateLogo"
+import AutoMatelogo from "../../assets/AutoMateLogo"
 import { FC, ReactNode } from "react"
 import { styled } from "styled-components"
 
