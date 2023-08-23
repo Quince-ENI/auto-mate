@@ -5,6 +5,7 @@ export const INITIAL_STATE: AutoMateState = {
     filter: "test",
   },
   entities: {
+    isUserLogged: false,
     user: {
       name: "defaultName",
       picture: "defaultpicture",

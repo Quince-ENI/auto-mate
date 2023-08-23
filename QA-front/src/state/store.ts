@@ -1,11 +1,14 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit"
 import { useDispatch } from "react-redux"
 import { INITIAL_STATE } from "./constants"
+import { onSetIsUserLogged } from "./reducer"
 
 const autoMateSlice = createSlice({
   name: "autoMate",
   initialState: INITIAL_STATE,
-  reducers: {},
+  reducers: {
+    setIsUserLogged: onSetIsUserLogged,
+  },
   extraReducers: {},
 })
 

@@ -1,15 +1,16 @@
-import { GsiButtonConfiguration } from "@react-oauth/google"
+export type User = {
+  name: string
+  picture: string
+  email: string
+}
 
 interface AutoMateUiState {
   filter: string
 }
 
 interface AutoMateEntitiesState {
-  user: {
-    name: string
-    picture: string
-    email: string
-  }
+  isUserLogged: boolean
+  user: User
 }
 
 export interface AutoMateState {

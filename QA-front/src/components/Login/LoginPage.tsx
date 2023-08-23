@@ -7,6 +7,8 @@ import { Link, Navigate } from "react-router-dom"
 import { GoogleCredentialResponse, GoogleLogin } from "@react-oauth/google"
 import jwt_decode from "jwt-decode"
 import { getToken, storeToken } from "../../api/jwt"
+import { useDispatch } from "react-redux"
+import { actions, useAutoMateDispatch } from "../../state/store"
 
 const StyledForm = styled(Form)`
   max-width: 400px;
@@ -29,20 +31,28 @@ const PictureContainer = styled.div`
   background: url("../../assets/login.jpg") lightgray -494.377px 0px / 223.968% 130.664%
     no-repeat;
 `
-const LoginPage: FC = () => {
-  const onSuccess = (response: GoogleCredentialResponse) => {
-    response.credential ? storeToken(response.credential) : getToken()
-    return <Navigate to={"/"} />
+const useOnSuccess = (response: GoogleCredentialResponse) => {
+  const dispatch = useAutoMateDispatch()
+  let jwtToken = getToken()
+  if (response.credential) {
+    storeToken(response.credential)
+    jwtToken = getToken()
   }
-  const errorMessage = () => {
-    console.log("kc")
+  if (jwtToken) {
+    dispatch(actions.setIsUserLogged(jwtToken))
   }
+  return <Navigate to="/" replace={true} />
+}
+const errorMessage = () => {
+  console.log("kc")
+}
 
+const LoginPage: FC = () => {
   return (
     <LoginPageContainer>
       <FormContainer>
         <h1>Login</h1>
-        <GoogleLogin onSuccess={onSuccess} onError={errorMessage} />
+        <GoogleLogin onSuccess={useOnSuccess} onError={errorMessage} />
       </FormContainer>
 
       <PictureContainer></PictureContainer>

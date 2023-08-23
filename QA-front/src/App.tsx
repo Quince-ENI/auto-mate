@@ -6,15 +6,17 @@ import Home from "./components/Home/Home"
 import UserRoute from "./components/Route/UserRoute"
 import LoginPage from "./components/Login/LoginPage"
 import { useSelector } from "react-redux"
-import { selectUser } from "./state/selector"
+import { selectIsUserLogged } from "./state/selector"
+import LoginPageLayout from "./components/Login/LoginPageLayout"
 
 function App() {
+  const isUserLogged = useSelector(selectIsUserLogged)
   return (
     <div className="App">
       <Routes>
-        <Route path="login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<AutoMateLayout />}>
-          <Route index element={<Home />} />
+          <Route path="home" element={<Home />} />
           <Route path="route" element={<UserRoute />} />
         </Route>
       </Routes>
