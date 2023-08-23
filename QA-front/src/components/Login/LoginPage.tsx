@@ -4,6 +4,9 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons"
 import { styled } from "styled-components"
 import AutoMatelogo from "../../assets/AutoMateLogo"
 import { Link, Navigate } from "react-router-dom"
+import { GoogleCredentialResponse, GoogleLogin } from "@react-oauth/google"
+import jwt_decode from "jwt-decode"
+import { getToken, storeToken } from "../../api/jwt"
 
 const StyledForm = styled(Form)`
   max-width: 400px;
@@ -27,40 +30,19 @@ const PictureContainer = styled.div`
     no-repeat;
 `
 const LoginPage: FC = () => {
+  const onSuccess = (response: GoogleCredentialResponse) => {
+    response.credential ? storeToken(response.credential) : getToken()
+    return <Navigate to={"/"} />
+  }
+  const errorMessage = () => {
+    console.log("kc")
+  }
+
   return (
     <LoginPageContainer>
       <FormContainer>
         <h1>Login</h1>
-        <StyledForm
-          name="normal_login"
-          className="login-form"
-          initialValues={{ remember: true }}
-          onFinish={() => <Navigate to="/" />}
-        >
-          <Form.Item
-            name="username"
-            rules={[{ required: true, message: "Please input your Username!" }]}
-          >
-            <Input
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: "Please input your Password!" }]}
-          >
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Item>
-
-          <Form.Item>
-            <Link to="/">Login</Link>
-          </Form.Item>
-        </StyledForm>
+        <GoogleLogin onSuccess={onSuccess} onError={errorMessage} />
       </FormContainer>
 
       <PictureContainer></PictureContainer>

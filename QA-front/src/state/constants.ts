@@ -5,6 +5,10 @@ export const INITIAL_STATE: AutoMateState = {
     filter: "test",
   },
   entities: {
-    user: false,
+    user: {
+      name: "defaultName",
+      picture: "defaultpicture",
+      email: "defaultMail",
+    },
   },
 }
