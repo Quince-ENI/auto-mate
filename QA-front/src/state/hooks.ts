@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
-import { AutoMateDispatch } from "./store"
+import { useDispatch } from 'react-redux';
+import { AutoMateDispatch } from './store';
 
-export const useAutoMateDispatch: () => AutoMateDispatch = useDispatch
+export const useAutoMateDispatch: () => AutoMateDispatch = useDispatch;

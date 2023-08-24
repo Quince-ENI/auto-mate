@@ -1,0 +1,9 @@
+{
+    "eslint.format.enable": true,
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+    },
+    "typescript.tsdk": "node_modules/typescript/lib"
+}
