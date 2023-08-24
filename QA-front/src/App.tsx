@@ -10,7 +10,6 @@ import { selectIsUserLogged } from "./state/selector"
 import LoginPageLayout from "./components/Login/LoginPageLayout"
 
 function App() {
-  const isUserLogged = useSelector(selectIsUserLogged)
   return (
     <div className="App">
       <Routes>

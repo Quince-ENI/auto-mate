@@ -1,18 +1,11 @@
-import { Button, Form, Input } from "antd"
+import { Form } from "antd"
 import { FC } from "react"
-import { LockOutlined, UserOutlined } from "@ant-design/icons"
 import { styled } from "styled-components"
-import AutoMatelogo from "../../assets/AutoMateLogo"
-import { Link, Navigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { GoogleCredentialResponse, GoogleLogin } from "@react-oauth/google"
-import jwt_decode from "jwt-decode"
 import { getToken, storeToken } from "../../api/jwt"
-import { useDispatch } from "react-redux"
 import { actions, useAutoMateDispatch } from "../../state/store"
 
-const StyledForm = styled(Form)`
-  max-width: 400px;
-`
 const LoginPageContainer = styled.div`
   width: 100vw;
   height: 100vh;
@@ -31,17 +24,20 @@ const PictureContainer = styled.div`
   background: url("../../assets/login.jpg") lightgray -494.377px 0px / 223.968% 130.664%
     no-repeat;
 `
-const useOnSuccess = (response: GoogleCredentialResponse) => {
+function useOnSuccess(): (response: GoogleCredentialResponse) => void {
   const dispatch = useAutoMateDispatch()
-  let jwtToken = getToken()
-  if (response.credential) {
-    storeToken(response.credential)
-    jwtToken = getToken()
+  const navigate = useNavigate()
+  return (response) => {
+    let jwtToken = getToken()
+    if (response.credential) {
+      storeToken(response.credential)
+      jwtToken = getToken()
+    }
+    if (jwtToken) {
+      dispatch(actions.setIsUserLogged(jwtToken))
+      navigate("/", { replace: true })
+    }
   }
-  if (jwtToken) {
-    dispatch(actions.setIsUserLogged(jwtToken))
-  }
-  return <Navigate to="/" replace={true} />
 }
 const errorMessage = () => {
   console.log("kc")
@@ -52,7 +48,7 @@ const LoginPage: FC = () => {
     <LoginPageContainer>
       <FormContainer>
         <h1>Login</h1>
-        <GoogleLogin onSuccess={useOnSuccess} onError={errorMessage} />
+        <GoogleLogin onSuccess={useOnSuccess()} onError={errorMessage} />
       </FormContainer>
 
       <PictureContainer></PictureContainer>
