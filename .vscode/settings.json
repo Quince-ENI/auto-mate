@@ -1,0 +1,12 @@
+{
+    "eslint.format.enable": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true,
+        "source.organizeImports": true
+    },
+    "editor.formatOnSave": false,
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "typescript.tsdk": "QA-front/node_modules/typescript/lib"
+}

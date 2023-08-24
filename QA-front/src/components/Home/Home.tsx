@@ -1,6 +1,4 @@
-import { FC } from "react"
+import { FC } from 'react';
 
-const Home: FC = () => {
-  return <h1>Ici c'est automate</h1>
-}
-export default Home
+const Home: FC = () => <h1>Ici c'est automate</h1>;
+export default Home;

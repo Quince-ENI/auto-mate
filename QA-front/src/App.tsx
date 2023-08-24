@@ -1,15 +1,12 @@
-import "./App.css"
-import { Navigate, Route, Routes } from "react-router-dom"
-import { GoogleLogin } from "@react-oauth/google"
-import AutoMateLayout from "./components/Layout/AutoMateLayout"
-import Home from "./components/Home/Home"
-import UserRoute from "./components/Route/UserRoute"
-import LoginPage from "./components/Login/LoginPage"
-import { useSelector } from "react-redux"
-import { selectIsUserLogged } from "./state/selector"
-import LoginPageLayout from "./components/Login/LoginPageLayout"
+import { ReactElement } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
+import Home from './components/Home/Home';
+import AutoMateLayout from './components/Layout/AutoMateLayout';
+import LoginPage from './components/Login/LoginPage';
+import UserRoute from './components/Route/UserRoute';
 
-function App() {
+function App(): ReactElement {
   return (
     <div className="App">
       <Routes>
@@ -20,7 +17,7 @@ function App() {
         </Route>
       </Routes>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
