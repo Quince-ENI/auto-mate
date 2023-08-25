@@ -1,10 +1,15 @@
-import { AutoMateState } from "./interfaces"
+import { AutoMateState } from './interfaces';
 
 export const INITIAL_STATE: AutoMateState = {
   ui: {
-    filter: "test",
+    filter: 'test'
   },
   entities: {
-    carName: "clio",
-  },
-}
+    isUserLogged: false,
+    user: {
+      name: 'defaultName',
+      picture: 'defaultpicture',
+      email: 'defaultMail'
+    }
+  }
+};

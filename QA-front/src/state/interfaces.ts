@@ -1,12 +1,19 @@
+export type User = {
+  name: string;
+  picture: string;
+  email: string;
+};
+
 interface AutoMateUiState {
-  filter: string
+  filter: string;
 }
 
 interface AutoMateEntitiesState {
-  carName: string
+  isUserLogged: boolean;
+  user: User;
 }
 
 export interface AutoMateState {
-  ui: AutoMateUiState
-  entities: AutoMateEntitiesState
+  ui: AutoMateUiState;
+  entities: AutoMateEntitiesState;
 }
