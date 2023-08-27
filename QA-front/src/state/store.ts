@@ -1,5 +1,7 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
+import { getCarsAsync } from '../state/actions/cars.actions';
+import { onGetCarsAsyncFulfilled, onGetCarsAsyncPending, onGetCarsAsyncRejected } from '../state/reducer/cars.reducer';
 import { INITIAL_STATE } from './constants';
 import { onSetIsUserLogged } from './reducer';
 
@@ -9,7 +11,11 @@ const autoMateSlice = createSlice({
   reducers: {
     setIsUserLogged: onSetIsUserLogged
   },
-  extraReducers: {}
+  extraReducers: builder =>
+    builder
+      .addCase(getCarsAsync.pending, onGetCarsAsyncPending)
+      .addCase(getCarsAsync.fulfilled, onGetCarsAsyncFulfilled)
+      .addCase(getCarsAsync.rejected, onGetCarsAsyncRejected)
 });
 
 export const actions = {
