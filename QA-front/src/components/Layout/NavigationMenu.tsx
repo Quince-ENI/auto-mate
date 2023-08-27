@@ -28,7 +28,7 @@ const NavigationMenu: FC = () => {
   const decodeJwt: { picture: string } = jwtToken ? jwt_decode(jwtToken) : { picture: '' };
   const userPicture = decodeJwt ? decodeJwt.picture : '';
   const defaultItems: ItemType[] = [
-    getItem(<Link to="/">Accueil</Link>, 'home'),
+    getItem(<Link to="/home">Accueil</Link>, 'home'),
     getItem(<Link to="/route">Mes Trajets</Link>, 'route'),
     getItem(<Avatar size={48} src={userPicture} />, 'account')
   ];

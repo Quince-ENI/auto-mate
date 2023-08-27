@@ -6,14 +6,26 @@ export type User = {
 
 interface AutoMateUiState {
   filter: string;
+  carsLoading: boolean;
 }
 
 interface AutoMateEntitiesState {
   isUserLogged: boolean;
+  cars: Car[];
   user: User;
 }
 
 export interface AutoMateState {
   ui: AutoMateUiState;
   entities: AutoMateEntitiesState;
+}
+
+export interface Car {
+  immatriculation: string;
+  marque: string;
+  modele: string;
+  couleur: string;
+  nbDoors: number;
+  disponibility: boolean;
+  kilometers: number;
 }
