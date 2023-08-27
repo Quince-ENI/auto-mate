@@ -5,7 +5,7 @@ export async function getCars(): Promise<Car[]> {
     {
       immatriculation: 'AE-123-CD',
       marque: 'Renault',
-      modele: 'Clio',
+      modele: 'Megane',
       couleur: 'Rouge',
       nbDoors: 5,
       disponibility: true,
