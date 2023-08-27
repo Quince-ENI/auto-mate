@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getToken, storeToken } from '../../api/jwt';
+import imgLogin from '../../assets/login.jpg';
 import { actions, useAutoMateDispatch } from '../../state/store';
 
 const LoginPageContainer = styled.div`
@@ -20,7 +21,7 @@ const FormContainer = styled.div`
 `;
 const PictureContainer = styled.div`
   width: 100%;
-  background: url('../../assets/login.jpg') lightgray -494.377px 0px / 223.968% 130.664% no-repeat;
+  background: url(${imgLogin}) lightgray -494.377px 0px / 223.968% 130.664% no-repeat;
 `;
 function useOnSuccess(): (response: GoogleCredentialResponse) => void {
   const dispatch = useAutoMateDispatch();
@@ -33,7 +34,7 @@ function useOnSuccess(): (response: GoogleCredentialResponse) => void {
     }
     if (jwtToken) {
       dispatch(actions.setIsUserLogged(jwtToken));
-      navigate('/', { replace: true });
+      navigate('/home', { replace: true });
     }
   };
 }
