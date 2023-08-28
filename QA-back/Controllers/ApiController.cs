@@ -9,42 +9,42 @@ namespace QA_back.Controllers;
 [ApiController]
 public class ApiController : ControllerBase
 {
-    private readonly Context _context;
+    private readonly ApiContext _context;
 
-    public ApiController(Context context)
+    public ApiController(ApiContext context)
     {
         _context = context;
     }
 
     // GET: api/Apis
     [HttpGet]
-    public ActionResult<IEnumerable<Api>> GetArticles()
+    public ActionResult<IEnumerable<Api>> GetApis()
     {
         return _context.Apis.ToList();
     }
 
     // GET: api/Apis/5
     [HttpGet("{id}")]
-    public ActionResult<Api> GetArticle(int id)
+    public ActionResult<Api> GetApi(int id)
     {
-        var article = _context.Apis.Find(id);
-        if (article == null)
+        var api = _context.Apis.Find(id);
+        if (api == null)
         {
             return NotFound();
         }
-        return article;
+        return api;
     }
 
     // PUT: api/Apis/5
     [HttpPut("{id}")]
-    public IActionResult UpdateArticle(int id, Api article)
+    public IActionResult UpdateApi(int id, Api api)
     {
-        if (id != article.Id)
+        if (id != api.Id)
         {
             return BadRequest();
         }
 
-        _context.Entry(article).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        _context.Entry(api).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
         _context.SaveChanges();
 
         return NoContent();
@@ -52,25 +52,25 @@ public class ApiController : ControllerBase
 
     // POST: api/Apis
     [HttpPost]
-    public ActionResult<Api> CreateArticle(Api article)
+    public ActionResult<Api> CreateApi(Api api)
     {
-        _context.Apis.Add(article);
+        _context.Apis.Add(api);
         _context.SaveChanges();
 
-        return CreatedAtAction(nameof(GetArticle), new { id = article.Id }, article);
+        return CreatedAtAction(nameof(GetApi), new { id = api.Id }, api);
     }
 
     // DELETE: api/Apis/5
     [HttpDelete("{id}")]
-    public IActionResult DeleteArticle(int id)
+    public IActionResult DeleteApi(int id)
     {
-        var article = _context.Apis.Find(id);
-        if (article == null)
+        var api = _context.Apis.Find(id);
+        if (api == null)
         {
             return NotFound();
         }
 
-        _context.Apis.Remove(article);
+        _context.Apis.Remove(api);
         _context.SaveChanges();
 
         return NoContent();
