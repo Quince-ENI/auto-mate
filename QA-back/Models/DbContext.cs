@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QA_back.Models;
 
-public class Context : DbContext
+public class ApiContext : DbContext
 {
-    public Context(DbContextOptions<Context> options) : base(options)
+    public ApiContext(DbContextOptions<ApiContext> options) : base(options)
     { }
 
     public DbSet<Api> Apis { get; set; }

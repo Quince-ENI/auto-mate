@@ -20,7 +20,7 @@ namespace QA_back
         // Cette méthode est appelée au runtime. Utilisez cette méthode pour ajouter des services au conteneur.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<Api>(options =>
+            services.AddDbContext<ApiContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
 
