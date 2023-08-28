@@ -1,11 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using QA_back.Models;
 
-public class ApiContext : DbContext
+public class Context : DbContext
 {
-    public ApiContext(DbContextOptions<ApiContext> options) : base(options)
-    { }
+    public Context(DbContextOptions<Context> options) : base(options){ }
 
-    public DbSet<Api> Apis { get; set; }
+    public DbSet<Car> Cars { get; set; }
+    public DbSet<Responsable> Responsables { get; set; }
+    public DbSet<Key> Keys { get; set; }
+    public DbSet<Site> Sites { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Road> Roads { get; set; }
 
 }
