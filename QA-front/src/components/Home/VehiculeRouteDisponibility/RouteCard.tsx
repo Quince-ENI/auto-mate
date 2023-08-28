@@ -11,15 +11,15 @@ export interface RouteCardProps {
 }
 
 const RouteCard: FC<RouteCardProps> = ({ departureCity, arrivalCity, remainingPlaces, departure_time }) => (
-  <Card>
+  <Card bodyStyle={{ overflow: 'auto' }}>
     <div>
       <p>{departureCity} </p>
       <FontAwesomeIcon icon={faArrowRight} />
       <p>{arrivalCity} </p>
     </div>
     <div>
-      <p>{remainingPlaces} </p>
-      <p>{departure_time} </p>
+      <p>Nombre de place disponible : {remainingPlaces} </p>
+      <p>Heure du départ : {departure_time}</p>
     </div>
     <Button type="primary" onClick={() => console.log('reservation')}>
       Réserver
