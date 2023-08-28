@@ -1,13 +1,17 @@
+export type Role = 'user' | 'admin';
+
 export type User = {
   name: string;
   picture: string;
   email: string;
+  role: Role;
 };
 
 interface AutoMateUiState {
   filter: string;
   carsLoading: boolean;
   routesLoading: boolean;
+  isUserReceive: boolean;
 }
 
 interface AutoMateEntitiesState {

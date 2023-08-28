@@ -1,9 +1,11 @@
 import { GoogleCredentialResponse, GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { getToken, storeToken } from '../../api/jwt';
 import imgLogin from '../../assets/login.jpg';
+import { getConnectedUserAsync } from '../../state/actions/user.actions';
 import { actions, useAutoMateDispatch } from '../../state/store';
 
 const LoginPageContainer = styled.div`
@@ -33,7 +35,10 @@ function useOnSuccess(): (response: GoogleCredentialResponse) => void {
       jwtToken = getToken();
     }
     if (jwtToken) {
+      const decodeJwt: { email: string } = jwt_decode(jwtToken);
+      const userMail = decodeJwt.email;
       dispatch(actions.setIsUserLogged(jwtToken));
+      dispatch(getConnectedUserAsync(userMail));
       navigate('/home', { replace: true });
     }
   };
