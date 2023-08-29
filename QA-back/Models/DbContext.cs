@@ -10,6 +10,6 @@ public class Context : DbContext
     public DbSet<Key> Keys { get; set; }
     public DbSet<Site> Sites { get; set; }
     public DbSet<User> Users { get; set; }
-    public DbSet<Road> Roads { get; set; }
+    public DbSet<Travel> Travels { get; set; }
 
 }
