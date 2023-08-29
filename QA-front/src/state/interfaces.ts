@@ -7,12 +7,14 @@ export type User = {
 interface AutoMateUiState {
   filter: string;
   carsLoading: boolean;
+  routesLoading: boolean;
 }
 
 interface AutoMateEntitiesState {
   isUserLogged: boolean;
   cars: Car[];
   user: User;
+  routes: Route[];
 }
 
 export interface AutoMateState {
@@ -28,4 +30,12 @@ export interface Car {
   nbDoors: number;
   disponibility: boolean;
   kilometers: number;
+}
+
+export interface Route {
+  departureCity: string;
+  arrivalCity: string;
+  remainingPlaces: number;
+  departure_time: string;
+  car: Car;
 }

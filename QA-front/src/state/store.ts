@@ -2,8 +2,10 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { getCarsAsync } from '../state/actions/cars.actions';
 import { onGetCarsAsyncFulfilled, onGetCarsAsyncPending, onGetCarsAsyncRejected } from '../state/reducer/cars.reducer';
+import { getRoutesAsync } from './actions/routes.actions';
 import { INITIAL_STATE } from './constants';
 import { onSetIsUserLogged } from './reducer';
+import { onGetRoutesAsyncFulfilled, onGetRoutesAsyncPending, onGetRoutesAsyncRejected } from './reducer/routes.reducer';
 
 const autoMateSlice = createSlice({
   name: 'autoMate',
@@ -16,6 +18,9 @@ const autoMateSlice = createSlice({
       .addCase(getCarsAsync.pending, onGetCarsAsyncPending)
       .addCase(getCarsAsync.fulfilled, onGetCarsAsyncFulfilled)
       .addCase(getCarsAsync.rejected, onGetCarsAsyncRejected)
+      .addCase(getRoutesAsync.pending, onGetRoutesAsyncPending)
+      .addCase(getRoutesAsync.fulfilled, onGetRoutesAsyncFulfilled)
+      .addCase(getRoutesAsync.rejected, onGetRoutesAsyncRejected)
 });
 
 export const actions = {

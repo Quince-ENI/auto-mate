@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import VehiculeDisponibilityContainer from './VehiculeDisponibility/VehiculeDiponibilityContainer';
+import VehiculeDisponibilityContainer from './VehiculeRouteDisponibility/VehiculeDiponibilityContainer';
 
 const Home: FC = () => (
   <div>

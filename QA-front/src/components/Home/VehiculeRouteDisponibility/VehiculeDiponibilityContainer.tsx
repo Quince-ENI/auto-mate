@@ -3,7 +3,9 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { styled } from 'styled-components';
 import { selectCars } from '../../../state/selector/cars.selector';
+import { selectRoutes } from '../../../state/selector/routes.selector';
 import CarsCard from './CarsCard';
+import RouteCard from './RouteCard';
 
 const StyledRow = styled(Row)`
   margin-top: 20px;
@@ -13,6 +15,7 @@ const StyledRow = styled(Row)`
 
 const VehiculeDisponibilityContainer: FC = () => {
   const cars = useSelector(selectCars);
+  const routes = useSelector(selectRoutes);
   return (
     <StyledRow gutter={22}>
       <Col span={11}>
@@ -24,7 +27,14 @@ const VehiculeDisponibilityContainer: FC = () => {
       </Col>
       <Col span={11}>
         <Card title="Trajet" bordered={false}>
-          Card content
+          {routes.map(route => (
+            <RouteCard
+              arrivalCity={route.arrivalCity}
+              departureCity={route.departureCity}
+              departure_time={route.departure_time}
+              remainingPlaces={route.remainingPlaces}
+            />
+          ))}
         </Card>
       </Col>
     </StyledRow>

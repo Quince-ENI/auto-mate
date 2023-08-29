@@ -1,4 +1,5 @@
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { ConfigProvider } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -16,12 +17,20 @@ function getRootElement(): HTMLElement {
 
 ReactDOM.createRoot(getRootElement()).render(
   <GoogleOAuthProvider clientId="491141015061-5paogai8633rhob8mall6o2p1c7umlqv.apps.googleusercontent.com">
-    <React.StrictMode>
-      <BrowserRouter>
-        <StoreProvider>
-          <App />
-        </StoreProvider>
-      </BrowserRouter>
-    </React.StrictMode>
+    <ConfigProvider
+      theme={{
+        token: {
+          colorPrimary: '#12551A'
+        }
+      }}
+    >
+      <React.StrictMode>
+        <BrowserRouter>
+          <StoreProvider>
+            <App />
+          </StoreProvider>
+        </BrowserRouter>
+      </React.StrictMode>
+    </ConfigProvider>
   </GoogleOAuthProvider>
 );

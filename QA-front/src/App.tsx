@@ -6,6 +6,7 @@ import AutoMateLayout from './components/Layout/AutoMateLayout';
 import LoginPage from './components/Login/LoginPage';
 import UserRoute from './components/Route/UserRoute';
 import { getCarsAsync } from './state/actions/cars.actions';
+import { getRoutesAsync } from './state/actions/routes.actions';
 import { useAutoMateDispatch } from './state/store';
 
 function App(): ReactElement {
@@ -14,6 +15,7 @@ function App(): ReactElement {
   useEffect(() => {
     if (!isInitialized.current) {
       dispatch(getCarsAsync());
+      dispatch(getRoutesAsync());
       isInitialized.current = true;
     }
   }, [dispatch, isInitialized]);
