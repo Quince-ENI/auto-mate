@@ -3,9 +3,15 @@ import { useDispatch } from 'react-redux';
 import { getCarsAsync } from '../state/actions/cars.actions';
 import { onGetCarsAsyncFulfilled, onGetCarsAsyncPending, onGetCarsAsyncRejected } from '../state/reducer/cars.reducer';
 import { getRoutesAsync } from './actions/routes.actions';
+import { getConnectedUserAsync } from './actions/user.actions';
 import { INITIAL_STATE } from './constants';
 import { onSetIsUserLogged } from './reducer';
 import { onGetRoutesAsyncFulfilled, onGetRoutesAsyncPending, onGetRoutesAsyncRejected } from './reducer/routes.reducer';
+import {
+  onGetConnectedUserAsyncFulfilled,
+  onGetConnectedUserAsyncPending,
+  onGetConnectedUserAsyncRejected
+} from './reducer/user.reducer';
 
 const autoMateSlice = createSlice({
   name: 'autoMate',
@@ -21,6 +27,9 @@ const autoMateSlice = createSlice({
       .addCase(getRoutesAsync.pending, onGetRoutesAsyncPending)
       .addCase(getRoutesAsync.fulfilled, onGetRoutesAsyncFulfilled)
       .addCase(getRoutesAsync.rejected, onGetRoutesAsyncRejected)
+      .addCase(getConnectedUserAsync.pending, onGetConnectedUserAsyncPending)
+      .addCase(getConnectedUserAsync.fulfilled, onGetConnectedUserAsyncFulfilled)
+      .addCase(getConnectedUserAsync.rejected, onGetConnectedUserAsyncRejected)
 });
 
 export const actions = {

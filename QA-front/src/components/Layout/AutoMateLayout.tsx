@@ -4,7 +4,7 @@ import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { selectIsUserLogged } from '../../state/selector';
+import { selectIsUserLogged } from '../../state/selector/user.selector';
 import NavigationMenu from './NavigationMenu';
 
 const MainLayout = styled(Layout)`

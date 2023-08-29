@@ -4,7 +4,9 @@ import './App.css';
 import Home from './components/Home/Home';
 import AutoMateLayout from './components/Layout/AutoMateLayout';
 import LoginPage from './components/Login/LoginPage';
+import RequestList from './components/Request/RequestList';
 import UserRoute from './components/Route/UserRoute';
+import Vehicules from './components/Vehicules/Vehicules';
 import { getCarsAsync } from './state/actions/cars.actions';
 import { getRoutesAsync } from './state/actions/routes.actions';
 import { useAutoMateDispatch } from './state/store';
@@ -26,6 +28,8 @@ function App(): ReactElement {
         <Route path="/" element={<AutoMateLayout />}>
           <Route path="home" element={<Home />} />
           <Route path="route" element={<UserRoute />} />
+          <Route path="vehicules" element={<Vehicules />} />
+          <Route path="request" element={<RequestList />} />
         </Route>
       </Routes>
     </div>
