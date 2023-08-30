@@ -4,8 +4,8 @@ export const INITIAL_STATE: AutoMateState = {
   ui: {
     filter: 'test',
     carsLoading: false,
-    routesLoading: false,
-    isUserReceive: false
+    routesLoading: false, // Ajoutez cette propriété
+    isUserReceive: false // Ajoutez cette propriété
   },
   entities: {
     isUserLogged: undefined,
