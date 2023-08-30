@@ -5,8 +5,8 @@ using System.Linq;
 namespace QA_back.Controllers;
 
 
-[Route("travel/[controller]")]
-//[TravelController]
+[Route("[controller]")]
+[Controller]
 public class TravelController : ControllerBase
 {
     private readonly Context _context;
@@ -16,14 +16,14 @@ public class TravelController : ControllerBase
         _context = context;
     }
 
-    // GET: travel/Travels
+    // GET: Travels
     [HttpGet]
     public ActionResult<IEnumerable<Travel>> GetTravels()
     {
         return _context.Travels.ToList();
     }
 
-    // GET: travel/Travels/5
+    // GET: Travels/5
     [HttpGet("{id}")]
     public ActionResult<Travel> GetTravel(int id)
     {
@@ -35,7 +35,7 @@ public class TravelController : ControllerBase
         return travel;
     }
 
-    // PUT: travel/Travels/5
+    // PUT: Travels/5
     [HttpPut("{id}")]
     public IActionResult UpdateTravel(int id, Travel travel)
     {
@@ -50,7 +50,7 @@ public class TravelController : ControllerBase
         return NoContent();
     }
 
-    // POST: travel/Travels
+    // POST: Travels
     [HttpPost]
     public ActionResult<Travel> CreateTravel(Travel travel)
     {
@@ -60,7 +60,7 @@ public class TravelController : ControllerBase
         return CreatedAtAction(nameof(GetTravel), new { id = travel.idRoute }, travel);
     }
 
-    // DELETE: travel/Travels/5
+    // DELETE: Travels/5
     [HttpDelete("{id}")]
     public IActionResult DeleteTravel(int id)
     {

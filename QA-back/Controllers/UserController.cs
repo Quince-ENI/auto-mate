@@ -5,8 +5,8 @@ using System.Linq;
 namespace QA_back.Controllers;
 
 
-[Route("user/[controller]")]
-//[UserController]
+[Route("[controller]")]
+[Controller]
 public class UserController : ControllerBase
 {
     private readonly Context _context;
@@ -16,14 +16,14 @@ public class UserController : ControllerBase
         _context = context;
     }
 
-    // GET: user/Users
+    // GET: Users
     [HttpGet]
     public ActionResult<IEnumerable<User>> GetUsers()
     {
         return _context.Users.ToList();
     }
 
-    // GET: user/Users/5
+    // GET: Users/5
     [HttpGet("{id}")]
     public ActionResult<User> GetUser(int id)
     {
@@ -35,7 +35,7 @@ public class UserController : ControllerBase
         return user;
     }
 
-    // PUT: user/Users/5
+    // PUT: Users/5
     [HttpPut("{id}")]
     public IActionResult UpdateUser(int id, User user)
     {
@@ -50,7 +50,7 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
-    // POST: user/Users
+    // POST: Users
     [HttpPost]
     public ActionResult<User> CreateUser(User user)
     {
@@ -60,7 +60,7 @@ public class UserController : ControllerBase
         return CreatedAtAction(nameof(GetUser), new { id = user.registration_number }, user);
     }
 
-    // DELETE: user/Users/5
+    // DELETE: Users/5
     [HttpDelete("{id}")]
     public IActionResult DeleteUser(int id)
     {

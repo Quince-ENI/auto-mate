@@ -4,8 +4,7 @@ using System.Linq;
 
 namespace QA_back.Controllers;
 
-
-[Route("site/[controller]")]
+[Route("[controller]")]
 [Controller]
 public class SiteController : ControllerBase
 {
@@ -16,14 +15,14 @@ public class SiteController : ControllerBase
         _context = context;
     }
 
-    // GET: site/Sites
+    // GET: Sites
     [HttpGet]
     public ActionResult<IEnumerable<Site>> GetSites()
     {
         return _context.Sites.ToList();
     }
 
-    // GET: site/Sites/5
+    // GET: Sites/5
     [HttpGet("{id}")]
     public ActionResult<Site> GetSite(int id)
     {
@@ -35,7 +34,7 @@ public class SiteController : ControllerBase
         return site;
     }
 
-    // PUT: site/Sites/5
+    // PUT: Sites/5
     [HttpPut("{id}")]
     public IActionResult UpdateSite(int id, Site site)
     {
@@ -50,7 +49,7 @@ public class SiteController : ControllerBase
         return NoContent();
     }
 
-    // POST: site/Sites
+    // POST: Sites
     [HttpPost]
     public ActionResult<Site> CreateSite(Site site)
     {
@@ -60,7 +59,7 @@ public class SiteController : ControllerBase
         return CreatedAtAction(nameof(GetSite), new { id = site.idSite }, site);
     }
 
-    // DELETE: site/Sites/5
+    // DELETE: Sites/5
     [HttpDelete("{id}")]
     public IActionResult DeleteSite(int id)
     {

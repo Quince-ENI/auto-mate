@@ -4,9 +4,8 @@ using System.Linq;
 
 namespace QA_back.Controllers;
 
-
-[Route("car/[controller]")]
-//[CarController]
+[Route("[controller]")]
+[Controller]
 public class CarController : ControllerBase
 {
     private readonly Context _context;
@@ -16,14 +15,14 @@ public class CarController : ControllerBase
         _context = context;
     }
 
-    // GET: car/Cars
+    // GET: Cars
     [HttpGet]
     public ActionResult<IEnumerable<Car>> GetCars()
     {
         return _context.Cars.ToList();
     }
 
-    // GET: car/Cars/5
+    // GET: Cars/5
     [HttpGet("{id}")]
     public ActionResult<Car> GetCar(int id)
     {
@@ -35,7 +34,7 @@ public class CarController : ControllerBase
         return car;
     }
 
-    // PUT: car/Cars/5
+    // PUT: Cars/5
     [HttpPut("{id}")]
     public IActionResult UpdateCar(int id, Car car)
     {
@@ -50,7 +49,7 @@ public class CarController : ControllerBase
         return NoContent();
     }
 
-    // POST: car/Cars
+    // POST: Cars
     [HttpPost]
     public ActionResult<Car> CreateCar(Car car)
     {
@@ -60,7 +59,7 @@ public class CarController : ControllerBase
         return CreatedAtAction(nameof(GetCar), new { id = car.idCar }, car);
     }
 
-    // DELETE: car/Cars/5
+    // DELETE: Cars/5
     [HttpDelete("{id}")]
     public IActionResult DeleteCar(int id)
     {

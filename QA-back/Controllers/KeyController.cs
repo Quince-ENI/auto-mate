@@ -5,8 +5,8 @@ using System.Linq;
 namespace QA_back.Controllers;
 
 
-[Route("key/[controller]")]
-//[KeyController]
+[Route("[controller]")]
+[Controller]
 public class KeyController : ControllerBase
 {
     private readonly Context _context;
@@ -16,14 +16,14 @@ public class KeyController : ControllerBase
         _context = context;
     }
 
-    // GET: key/Keys
+    // GET: Keys
     [HttpGet]
     public ActionResult<IEnumerable<Key>> GetKeys()
     {
         return _context.Keys.ToList();
     }
 
-    // GET: key/Keys/5
+    // GET: Keys/5
     [HttpGet("{id}")]
     public ActionResult<Key> GetKey(int id)
     {
@@ -35,7 +35,7 @@ public class KeyController : ControllerBase
         return key;
     }
 
-    // PUT: key/Keys/5
+    // PUT: Keys/5
     [HttpPut("{id}")]
     public IActionResult UpdateKey(int id, Key key)
     {
@@ -50,7 +50,7 @@ public class KeyController : ControllerBase
         return NoContent();
     }
 
-    // POST: key/Keys
+    // POST: Keys
     [HttpPost]
     public ActionResult<Key> CreateKey(Key key)
     {
@@ -60,7 +60,7 @@ public class KeyController : ControllerBase
         return CreatedAtAction(nameof(GetKey), new { id = key.idKey }, key);
     }
 
-    // DELETE: key/Keys/5
+    // DELETE: Keys/5
     [HttpDelete("{id}")]
     public IActionResult DeleteKey(int id)
     {
