@@ -7,8 +7,11 @@ export type User = {
   role: Role;
 };
 
+interface AutoMateUiFilterState {
+  sites: string[];
+}
 interface AutoMateUiState {
-  filter: string;
+  filter: AutoMateUiFilterState;
   carsLoading: boolean;
   routesLoading: boolean;
   isUserReceive: boolean;
@@ -41,6 +44,8 @@ export interface Route {
   departureCity: string;
   arrivalCity: string;
   remainingPlaces: number;
-  departure_time: string;
+  departureTime: string;
+  departureDate: Date;
+  arrivalDate: Date;
   car: Car;
 }
