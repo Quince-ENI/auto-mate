@@ -1,6 +1,6 @@
 import { AutoMateState, User } from '../interfaces';
 
-export function selectIsUserLogged(state: AutoMateState): boolean {
+export function selectIsUserLogged(state: AutoMateState): boolean | undefined {
   return state.entities.isUserLogged;
 }
 

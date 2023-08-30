@@ -4,7 +4,7 @@ export function selectUserRole(state: AutoMateState): string {
   return state.entities.user.role;
 }
 
-export function selectIsUserLogged(state: AutoMateState): boolean {
+export function selectIsUserLogged(state: AutoMateState): boolean | undefined {
   return state.entities.isUserLogged;
 }
 
