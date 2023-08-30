@@ -7,6 +7,7 @@ COPY package.json package-lock.json ./
 
 # Installation des dépendances
 RUN npm install
+RUN npm install vite --save-dev
 
 # Copie des fichiers de l'application
 COPY . .
@@ -16,3 +17,6 @@ RUN npm run build
 
 # Exposition du port 80 pour le serveur nginx
 EXPOSE 80
+
+# Commande d'exécution de l'application (ici, nous utilisons le serveur de développement Vite)
+CMD ["npm", "run", "dev", "--", "--no-open"]
