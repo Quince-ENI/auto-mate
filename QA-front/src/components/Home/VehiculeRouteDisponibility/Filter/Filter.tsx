@@ -1,6 +1,11 @@
 import { Card, DatePicker, Select } from 'antd';
+
+import { DefaultOptionType } from 'antd/es/select';
 import { FC } from 'react';
 import { styled } from 'styled-components';
+import { RangeValue } from '../VehiculeDiponibilityContainer';
+
+const { RangePicker } = DatePicker;
 
 const FilterCard = styled(Card)`
   width: 100%;
@@ -25,18 +30,16 @@ export const FilterItem = styled.div`
     width: 80%;
   }
 `;
-const sites = ['Nantes', 'Niort', 'Renne'];
-const siteOptions = sites.map(site => ({ label: site, value: site }));
 
-function handleFilterChange(value: string): void {
-  console.log(`selected ${value}`);
+interface FilterProps {
+  siteOptions: DefaultOptionType[];
+  dates: RangeValue;
+  value: RangeValue;
+  handleDateFilterChange: (val: any) => void;
+  handleSelectFilterChange: (val: string[]) => void;
 }
 
-function handleFilterDateChange(value: string): void {
-  console.log(`selected ${value}`);
-}
-
-const Filter: FC = () => (
+const Filter: FC<FilterProps> = ({ siteOptions, dates, value, handleSelectFilterChange, handleDateFilterChange }) => (
   <>
     <FilterCard>
       <FilterContainer>
@@ -47,12 +50,12 @@ const Filter: FC = () => (
             allowClear
             placeholder="Site de départ"
             options={siteOptions}
-            onChange={handleFilterChange}
+            onChange={handleSelectFilterChange}
           />
         </FilterItem>
         <FilterItem>
-          <FilterTitle>Site d'arrivée</FilterTitle>
-          <DatePicker showTime={{ format: 'HH:mm' }} format="YYYY-MM-DD HH:mm" onChange={handleFilterDateChange} />
+          <FilterTitle>Date de départ</FilterTitle>
+          <RangePicker value={dates || value} onChange={handleDateFilterChange} changeOnBlur />
         </FilterItem>
       </FilterContainer>
     </FilterCard>

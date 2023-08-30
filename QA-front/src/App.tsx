@@ -9,6 +9,7 @@ import UserRoute from './components/Route/UserRoute';
 import Vehicules from './components/Vehicules/Vehicules';
 import { getCarsAsync } from './state/actions/cars.actions';
 import { getRoutesAsync } from './state/actions/routes.actions';
+import { getSitesAsync } from './state/actions/sites.actions';
 import { useAutoMateDispatch } from './state/store';
 
 function App(): ReactElement {
@@ -18,6 +19,7 @@ function App(): ReactElement {
     if (!isInitialized.current) {
       dispatch(getCarsAsync());
       dispatch(getRoutesAsync());
+      dispatch(getSitesAsync());
       isInitialized.current = true;
     }
   }, [dispatch, isInitialized]);

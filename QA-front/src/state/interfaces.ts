@@ -19,6 +19,7 @@ interface AutoMateEntitiesState {
   cars: Car[];
   user: User;
   routes: Route[];
+  sites: string[];
 }
 
 export interface AutoMateState {

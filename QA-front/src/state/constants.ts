@@ -9,6 +9,7 @@ export const INITIAL_STATE: AutoMateState = {
   },
   entities: {
     isUserLogged: undefined,
+    sites: ['Nantes', 'Niort', 'Renne'],
     routes: [
       {
         departureCity: 'Nantes',
