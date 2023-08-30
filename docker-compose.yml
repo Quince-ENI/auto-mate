@@ -5,6 +5,16 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    depends_on:
+      - back  
+  back:
+    build:
+      context: ./QA-back
+      dockerfile: Dockerfile 
+    ports:
+      - 8000:8000  
+    depends_on:
+      - db  
   db:
     # build:
     #   context: ./BDD
