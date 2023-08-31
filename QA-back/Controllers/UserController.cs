@@ -24,10 +24,22 @@ public class UserController : ControllerBase
     }
 
     // GET: User/5
-    [HttpGet("{id}")]
-    public ActionResult<User> GetUser(int id)
+    [HttpGet("Id/{registration_number}")]
+    public ActionResult<User> GetUser(int registration_number)
     {
-        var user = _context.User.Find(id);
+        var user = _context.User.Find(registration_number);
+        if (user == null)
+        {
+            return NotFound();
+        }
+        return user;
+    }
+
+    // GET: User/byEmail?mail=example@email.com
+    [HttpGet("byEmail")]
+    public ActionResult<User> GetUserbyEmail(string mail)
+    {
+        var user = _context.User.SingleOrDefault(u => u.mail == mail);
         if (user == null)
         {
             return NotFound();

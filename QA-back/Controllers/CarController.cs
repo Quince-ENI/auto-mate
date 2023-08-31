@@ -17,14 +17,14 @@ namespace QA_back.Controllers
             _context = context;
         }
 
-        // GET: Cars
+        // GET: Car
         [HttpGet]
         public ActionResult<IEnumerable<Car>> GetCars()
         {
             return _context.Car.ToList();
         }
 
-        // GET: Cars/5
+        // GET: Car/5
         [HttpGet("{id}")]
         public ActionResult<Car> GetCar(int id)
         {
@@ -36,7 +36,7 @@ namespace QA_back.Controllers
             return car;
         }
 
-        // PUT: Cars/5
+        // PUT: Car/5
         [HttpPut("{id}")]
         public IActionResult UpdateCar(int id, Car car)
         {
@@ -51,7 +51,7 @@ namespace QA_back.Controllers
             return NoContent();
         }
 
-        // POST: Cars
+        // POST: Car
         [HttpPost]
         public ActionResult<Car> CreateCar(Car car)
         {
@@ -61,7 +61,7 @@ namespace QA_back.Controllers
             return CreatedAtAction(nameof(GetCar), new { id = car.idCar }, car);
         }
 
-        // DELETE: Cars/5
+        // DELETE: Car/5
         [HttpDelete("{id}")]
         public IActionResult DeleteCar(int id)
         {

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using QA_back.Models;
+using System.Diagnostics;
 using System.Linq;
 
 namespace QA_back.Controllers;
@@ -35,6 +36,38 @@ public class TravelController : ControllerBase
         return travel;
     }
 
+    // GET: Travel/Carpooling
+    [HttpGet("Carpooling")]
+    public ActionResult<IEnumerable<Travel>> GetCarpoolingTravels()
+    {
+        var carpoolingTravels = _context.Travel.Where(t => t.carpooling == 1).ToList();
+        return carpoolingTravels;
+    }
+
+    // GET: Travel/User/5
+    [HttpGet("UserTravels")]
+    public ActionResult<IEnumerable<Travel>> GetUserTravels(int id)
+    {
+        var userTravels = _context.Travel.Where(t => t.user == id).ToList();
+        if (userTravels == null)
+        {
+            return NotFound();
+        }
+        return userTravels;
+    }
+
+    // GET: Travel/User/5
+    [HttpGet("UserSiteTravels")]
+    public ActionResult<IEnumerable<Travel>> GetSiteTravels(int id)
+    {
+        var UserSiteTravels = _context.Travel.Where(t => t.departure_city == id).ToList();
+        if (UserSiteTravels == null)
+        {
+            return NotFound();
+        }
+        return UserSiteTravels;
+    }
+
     // PUT: Travel/5
     [HttpPut("{id}")]
     public IActionResult UpdateTravel(int id, Travel travel)
@@ -49,6 +82,21 @@ public class TravelController : ControllerBase
 
         return NoContent();
     }
+
+    // PUT: Travel/5
+    //[HttpPut("{id}")]
+    //public IActionResult ValidateTravel(int id, Travel travel)
+    //{
+    //    if (id != travel.idRoute)
+    //    {
+    //        return BadRequest();
+    //    }
+
+    //    _context.Entry(travel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+    //    _context.SaveChanges();
+
+    //    return NoContent();
+    //}
 
     // POST: Travel
     [HttpPost]
