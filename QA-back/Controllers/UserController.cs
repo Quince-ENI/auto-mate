@@ -5,8 +5,8 @@ using System.Linq;
 namespace QA_back.Controllers;
 
 
-[Route("user/[controller]")]
-//[UserController]
+[Route("[controller]")]
+[ApiController]
 public class UserController : ControllerBase
 {
     private readonly Context _context;
@@ -16,18 +16,18 @@ public class UserController : ControllerBase
         _context = context;
     }
 
-    // GET: user/Users
+    // GET: User
     [HttpGet]
     public ActionResult<IEnumerable<User>> GetUsers()
     {
-        return _context.Users.ToList();
+        return _context.User.ToList();
     }
 
-    // GET: user/Users/5
+    // GET: User/5
     [HttpGet("{id}")]
     public ActionResult<User> GetUser(int id)
     {
-        var user = _context.Users.Find(id);
+        var user = _context.User.Find(id);
         if (user == null)
         {
             return NotFound();
@@ -35,7 +35,7 @@ public class UserController : ControllerBase
         return user;
     }
 
-    // PUT: user/Users/5
+    // PUT: User/5
     [HttpPut("{id}")]
     public IActionResult UpdateUser(int id, User user)
     {
@@ -50,27 +50,27 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
-    // POST: user/Users
+    // POST: User
     [HttpPost]
     public ActionResult<User> CreateUser(User user)
     {
-        _context.Users.Add(user);
+        _context.User.Add(user);
         _context.SaveChanges();
 
         return CreatedAtAction(nameof(GetUser), new { id = user.registration_number }, user);
     }
 
-    // DELETE: user/Users/5
+    // DELETE: User/5
     [HttpDelete("{id}")]
     public IActionResult DeleteUser(int id)
     {
-        var user = _context.Users.Find(id);
+        var user = _context.User.Find(id);
         if (user == null)
         {
             return NotFound();
         }
 
-        _context.Users.Remove(user);
+        _context.User.Remove(user);
         _context.SaveChanges();
 
         return NoContent();

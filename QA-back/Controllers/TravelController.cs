@@ -5,8 +5,8 @@ using System.Linq;
 namespace QA_back.Controllers;
 
 
-[Route("travel/[controller]")]
-//[TravelController]
+[Route("[controller]")]
+[ApiController]
 public class TravelController : ControllerBase
 {
     private readonly Context _context;
@@ -16,18 +16,18 @@ public class TravelController : ControllerBase
         _context = context;
     }
 
-    // GET: travel/Travels
+    // GET: Travel
     [HttpGet]
     public ActionResult<IEnumerable<Travel>> GetTravels()
     {
-        return _context.Travels.ToList();
+        return _context.Travel.ToList();
     }
 
-    // GET: travel/Travels/5
+    // GET: Travel/5
     [HttpGet("{id}")]
     public ActionResult<Travel> GetTravel(int id)
     {
-        var travel = _context.Travels.Find(id);
+        var travel = _context.Travel.Find(id);
         if (travel == null)
         {
             return NotFound();
@@ -35,7 +35,7 @@ public class TravelController : ControllerBase
         return travel;
     }
 
-    // PUT: travel/Travels/5
+    // PUT: Travel/5
     [HttpPut("{id}")]
     public IActionResult UpdateTravel(int id, Travel travel)
     {
@@ -50,27 +50,27 @@ public class TravelController : ControllerBase
         return NoContent();
     }
 
-    // POST: travel/Travels
+    // POST: Travel
     [HttpPost]
     public ActionResult<Travel> CreateTravel(Travel travel)
     {
-        _context.Travels.Add(travel);
+        _context.Travel.Add(travel);
         _context.SaveChanges();
 
         return CreatedAtAction(nameof(GetTravel), new { id = travel.idRoute }, travel);
     }
 
-    // DELETE: travel/Travels/5
+    // DELETE: Travel/5
     [HttpDelete("{id}")]
     public IActionResult DeleteTravel(int id)
     {
-        var travel = _context.Travels.Find(id);
+        var travel = _context.Travel.Find(id);
         if (travel == null)
         {
             return NotFound();
         }
 
-        _context.Travels.Remove(travel);
+        _context.Travel.Remove(travel);
         _context.SaveChanges();
 
         return NoContent();
