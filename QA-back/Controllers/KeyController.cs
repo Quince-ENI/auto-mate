@@ -5,8 +5,8 @@ using System.Linq;
 namespace QA_back.Controllers;
 
 
-[Route("key/[controller]")]
-//[KeyController]
+[Route("[controller]")]
+[ApiController]
 public class KeyController : ControllerBase
 {
     private readonly Context _context;
@@ -16,18 +16,18 @@ public class KeyController : ControllerBase
         _context = context;
     }
 
-    // GET: key/Keys
+    // GET: Key
     [HttpGet]
     public ActionResult<IEnumerable<Key>> GetKeys()
     {
-        return _context.Keys.ToList();
+        return _context.Key.ToList();
     }
 
-    // GET: key/Keys/5
+    // GET: Key/5
     [HttpGet("{id}")]
     public ActionResult<Key> GetKey(int id)
     {
-        var key = _context.Keys.Find(id);
+        var key = _context.Key.Find(id);
         if (key == null)
         {
             return NotFound();
@@ -35,7 +35,7 @@ public class KeyController : ControllerBase
         return key;
     }
 
-    // PUT: key/Keys/5
+    // PUT: Key/5
     [HttpPut("{id}")]
     public IActionResult UpdateKey(int id, Key key)
     {
@@ -50,27 +50,27 @@ public class KeyController : ControllerBase
         return NoContent();
     }
 
-    // POST: key/Keys
+    // POST: Key
     [HttpPost]
     public ActionResult<Key> CreateKey(Key key)
     {
-        _context.Keys.Add(key);
+        _context.Key.Add(key);
         _context.SaveChanges();
 
         return CreatedAtAction(nameof(GetKey), new { id = key.idKey }, key);
     }
 
-    // DELETE: key/Keys/5
+    // DELETE: Key/5
     [HttpDelete("{id}")]
     public IActionResult DeleteKey(int id)
     {
-        var key = _context.Keys.Find(id);
+        var key = _context.Key.Find(id);
         if (key == null)
         {
             return NotFound();
         }
 
-        _context.Keys.Remove(key);
+        _context.Key.Remove(key);
         _context.SaveChanges();
 
         return NoContent();
