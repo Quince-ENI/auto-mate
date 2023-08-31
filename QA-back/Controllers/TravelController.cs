@@ -41,6 +41,10 @@ public class TravelController : ControllerBase
     public ActionResult<IEnumerable<Travel>> GetCarpoolingTravels()
     {
         var carpoolingTravels = _context.Travel.Where(t => t.carpooling == 1).ToList();
+        if (carpoolingTravels == null)
+        {
+            return NotFound();
+        }
         return carpoolingTravels;
     }
 
@@ -56,16 +60,16 @@ public class TravelController : ControllerBase
         return userTravels;
     }
 
-    // GET: Travel/User/5
-    [HttpGet("UserSiteTravels")]
-    public ActionResult<IEnumerable<Travel>> GetSiteTravels(int id)
+    // GET: Travel/Site/
+    [HttpGet("SiteTravels")]
+    public ActionResult<IEnumerable<Travel>> GetSiteTravels(string city)
     {
-        var UserSiteTravels = _context.Travel.Where(t => t.departure_city == id).ToList();
-        if (UserSiteTravels == null)
+        var siteTravels = _context.Travel.Where(t => t.departure_city == city).ToList();
+        if (siteTravels == null)
         {
             return NotFound();
         }
-        return UserSiteTravels;
+        return siteTravels;
     }
 
     // PUT: Travel/5
