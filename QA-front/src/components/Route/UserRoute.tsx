@@ -1,4 +1,10 @@
 import { FC } from 'react';
+import UserRouteTableContainer from './UserRouteTableContainer';
 
-const UserRoute: FC = () => <h1>Test</h1>;
+const UserRoute: FC = () => (
+  <div>
+    <UserRouteTableContainer />
+  </div>
+);
+
 export default UserRoute;
