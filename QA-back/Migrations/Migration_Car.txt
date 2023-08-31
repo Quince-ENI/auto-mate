@@ -1,0 +1,138 @@
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (8ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='automatebdd' AND TABLE_NAME='__EFMigrationsHistory';
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='automatebdd' AND TABLE_NAME='__EFMigrationsHistory';
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT `MigrationId`, `ProductVersion`
+      FROM `__EFMigrationsHistory`
+      ORDER BY `MigrationId`;
+Microsoft.EntityFrameworkCore.Migrations[20402]
+      Applying migration '20230831093428_Migration_Car'.
+Applying migration '20230831093428_Migration_Car'.
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (20ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      DROP PROCEDURE IF EXISTS `POMELO_BEFORE_DROP_PRIMARY_KEY`;
+      CREATE PROCEDURE `POMELO_BEFORE_DROP_PRIMARY_KEY`(IN `SCHEMA_NAME_ARGUMENT` VARCHAR(255), IN `TABLE_NAME_ARGUMENT` VARCHAR(255))
+      BEGIN
+      	DECLARE HAS_AUTO_INCREMENT_ID TINYINT(1);
+      	DECLARE PRIMARY_KEY_COLUMN_NAME VARCHAR(255);
+      	DECLARE PRIMARY_KEY_TYPE VARCHAR(255);
+      	DECLARE SQL_EXP VARCHAR(1000);
+      	SELECT COUNT(*)
+      		INTO HAS_AUTO_INCREMENT_ID
+      		FROM `information_schema`.`COLUMNS`
+      		WHERE `TABLE_SCHEMA` = (SELECT IFNULL(SCHEMA_NAME_ARGUMENT, SCHEMA()))
+      			AND `TABLE_NAME` = TABLE_NAME_ARGUMENT
+      			AND `Extra` = 'auto_increment'
+      			AND `COLUMN_KEY` = 'PRI'
+      			LIMIT 1;
+      	IF HAS_AUTO_INCREMENT_ID THEN
+      		SELECT `COLUMN_TYPE`
+      			INTO PRIMARY_KEY_TYPE
+      			FROM `information_schema`.`COLUMNS`
+      			WHERE `TABLE_SCHEMA` = (SELECT IFNULL(SCHEMA_NAME_ARGUMENT, SCHEMA()))
+      				AND `TABLE_NAME` = TABLE_NAME_ARGUMENT
+      				AND `COLUMN_KEY` = 'PRI'
+      			LIMIT 1;
+      		SELECT `COLUMN_NAME`
+      			INTO PRIMARY_KEY_COLUMN_NAME
+      			FROM `information_schema`.`COLUMNS`
+      			WHERE `TABLE_SCHEMA` = (SELECT IFNULL(SCHEMA_NAME_ARGUMENT, SCHEMA()))
+      				AND `TABLE_NAME` = TABLE_NAME_ARGUMENT
+      				AND `COLUMN_KEY` = 'PRI'
+      			LIMIT 1;
+      		SET SQL_EXP = CONCAT('ALTER TABLE `', (SELECT IFNULL(SCHEMA_NAME_ARGUMENT, SCHEMA())), '`.`', TABLE_NAME_ARGUMENT, '` MODIFY COLUMN `', PRIMARY_KEY_COLUMN_NAME, '` ', PRIMARY_KEY_TYPE, ' NOT NULL;');
+      		SET @SQL_EXP = SQL_EXP;
+      		PREPARE SQL_EXP_EXECUTE FROM @SQL_EXP;
+      		EXECUTE SQL_EXP_EXECUTE;
+      		DEALLOCATE PREPARE SQL_EXP_EXECUTE;
+      	END IF;
+      END;
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      DROP PROCEDURE IF EXISTS `POMELO_AFTER_ADD_PRIMARY_KEY`;
+      CREATE PROCEDURE `POMELO_AFTER_ADD_PRIMARY_KEY`(IN `SCHEMA_NAME_ARGUMENT` VARCHAR(255), IN `TABLE_NAME_ARGUMENT` VARCHAR(255), IN `COLUMN_NAME_ARGUMENT` VARCHAR(255))
+      BEGIN
+      	DECLARE HAS_AUTO_INCREMENT_ID INT(11);
+      	DECLARE PRIMARY_KEY_COLUMN_NAME VARCHAR(255);
+      	DECLARE PRIMARY_KEY_TYPE VARCHAR(255);
+      	DECLARE SQL_EXP VARCHAR(1000);
+      	SELECT COUNT(*)
+      		INTO HAS_AUTO_INCREMENT_ID
+      		FROM `information_schema`.`COLUMNS`
+      		WHERE `TABLE_SCHEMA` = (SELECT IFNULL(SCHEMA_NAME_ARGUMENT, SCHEMA()))
+      			AND `TABLE_NAME` = TABLE_NAME_ARGUMENT
+      			AND `COLUMN_NAME` = COLUMN_NAME_ARGUMENT
+      			AND `COLUMN_TYPE` LIKE '%int%'
+      			AND `COLUMN_KEY` = 'PRI';
+      	IF HAS_AUTO_INCREMENT_ID THEN
+      		SELECT `COLUMN_TYPE`
+      			INTO PRIMARY_KEY_TYPE
+      			FROM `information_schema`.`COLUMNS`
+      			WHERE `TABLE_SCHEMA` = (SELECT IFNULL(SCHEMA_NAME_ARGUMENT, SCHEMA()))
+      				AND `TABLE_NAME` = TABLE_NAME_ARGUMENT
+      				AND `COLUMN_NAME` = COLUMN_NAME_ARGUMENT
+      				AND `COLUMN_TYPE` LIKE '%int%'
+      				AND `COLUMN_KEY` = 'PRI';
+      		SELECT `COLUMN_NAME`
+      			INTO PRIMARY_KEY_COLUMN_NAME
+      			FROM `information_schema`.`COLUMNS`
+      			WHERE `TABLE_SCHEMA` = (SELECT IFNULL(SCHEMA_NAME_ARGUMENT, SCHEMA()))
+      				AND `TABLE_NAME` = TABLE_NAME_ARGUMENT
+      				AND `COLUMN_NAME` = COLUMN_NAME_ARGUMENT
+      				AND `COLUMN_TYPE` LIKE '%int%'
+      				AND `COLUMN_KEY` = 'PRI';
+      		SET SQL_EXP = CONCAT('ALTER TABLE `', (SELECT IFNULL(SCHEMA_NAME_ARGUMENT, SCHEMA())), '`.`', TABLE_NAME_ARGUMENT, '` MODIFY COLUMN `', PRIMARY_KEY_COLUMN_NAME, '` ', PRIMARY_KEY_TYPE, ' NOT NULL AUTO_INCREMENT;');
+      		SET @SQL_EXP = SQL_EXP;
+      		PREPARE SQL_EXP_EXECUTE FROM @SQL_EXP;
+      		EXECUTE SQL_EXP_EXECUTE;
+      		DEALLOCATE PREPARE SQL_EXP_EXECUTE;
+      	END IF;
+      END;
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (176ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CALL POMELO_BEFORE_DROP_PRIMARY_KEY(NULL, 'Users');
+      ALTER TABLE `Users` DROP PRIMARY KEY;
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (183ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CALL POMELO_BEFORE_DROP_PRIMARY_KEY(NULL, 'Travels');
+      ALTER TABLE `Travels` DROP PRIMARY KEY;
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (138ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CALL POMELO_BEFORE_DROP_PRIMARY_KEY(NULL, 'Sites');
+      ALTER TABLE `Sites` DROP PRIMARY KEY;
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (93ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CALL POMELO_BEFORE_DROP_PRIMARY_KEY(NULL, 'Keys');
+      ALTER TABLE `Keys` DROP PRIMARY KEY;
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (78ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      CALL POMELO_BEFORE_DROP_PRIMARY_KEY(NULL, 'Cars');
+      ALTER TABLE `Cars` DROP PRIMARY KEY;
+Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (30ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `Keys` DROP COLUMN `car`;
+fail: Microsoft.EntityFrameworkCore.Database.Command[20102]
+      Failed executing DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      ALTER TABLE `Users` RENAME `User`;
+Failed executing DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ALTER TABLE `Users` RENAME `User`;
+MySqlConnector.MySqlException (0x80004005): La table 'user' existe déjà
+   at MySqlConnector.Core.ResultSet.ReadResultSetHeaderAsync(IOBehavior ioBehavior) in /_/src/MySqlConnector/Core/ResultSet.cs:line 43
+   at MySqlConnector.MySqlDataReader.ActivateResultSet(CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 130
+   at MySqlConnector.MySqlDataReader.CreateAsync(CommandListPosition commandListPosition, ICommandPayloadCreator payloadCreator, IDictionary`2 cachedProcedures, IMySqlCommand command, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlDataReader.cs:line 468
+   at MySqlConnector.Core.CommandExecutor.ExecuteReaderAsync(IReadOnlyList`1 commands, ICommandPayloadCreator payloadCreator, CommandBehavior behavior, Activity activity, IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/Core/CommandExecutor.cs:line 56
+   at MySqlConnector.MySqlCommand.ExecuteNonQueryAsync(IOBehavior ioBehavior, CancellationToken cancellationToken) in /_/src/MySqlConnector/MySqlCommand.cs:line 296
+   at MySqlConnector.MySqlCommand.ExecuteNonQuery() in /_/src/MySqlConnector/MySqlCommand.cs:line 107
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteNonQuery(RelationalCommandParameterObject parameterObject)
+   at Microsoft.EntityFrameworkCore.Migrations.MigrationCommand.ExecuteNonQuery(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.MigrationCommandExecutor.ExecuteNonQuery(IEnumerable`1 migrationCommands, IRelationalConnection connection)
+   at Microsoft.EntityFrameworkCore.Migrations.Internal.Migrator.Migrate(String targetMigration)
+   at Microsoft.EntityFrameworkCore.Design.Internal.MigrationsOperations.UpdateDatabase(String targetMigration, String connectionString, String contextType)
+   at Microsoft.EntityFrameworkCore.Design.OperationExecutor.UpdateDatabaseImpl(String targetMigration, String connectionString, String contextType)
+   at Microsoft.EntityFrameworkCore.Design.OperationExecutor.UpdateDatabase.<>c__DisplayClass0_0.<.ctor>b__0()
+   at Microsoft.EntityFrameworkCore.Design.OperationExecutor.OperationBase.Execute(Action action)
+La table 'user' existe déjà
