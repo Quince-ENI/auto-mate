@@ -3,12 +3,19 @@ import { useDispatch } from 'react-redux';
 import { getCarsAsync } from '../state/actions/cars.actions';
 import { onGetCarsAsyncFulfilled, onGetCarsAsyncPending, onGetCarsAsyncRejected } from '../state/reducer/cars.reducer';
 import { onSetFilterDates, onSetFilterSite } from './actions/common.actions';
-import { getRoutesAsync } from './actions/routes.actions';
+import { createRouteAsync, getRoutesAsync } from './actions/routes.actions';
 import { getSitesAsync } from './actions/sites.actions';
 import { getConnectedUserAsync } from './actions/user.actions';
 import { INITIAL_STATE } from './constants';
 import { onSetIsUserLogged } from './reducer';
-import { onGetRoutesAsyncFulfilled, onGetRoutesAsyncPending, onGetRoutesAsyncRejected } from './reducer/routes.reducer';
+import {
+  onCreateRouteAsyncFulfilled,
+  onCreateRouteAsyncPending,
+  onCreateRouteAsyncRejected,
+  onGetRoutesAsyncFulfilled,
+  onGetRoutesAsyncPending,
+  onGetRoutesAsyncRejected
+} from './reducer/routes.reducer';
 import { onGetSitesAsyncFulfilled, onGetSitesAsyncPending, onGetSitesAsyncRejected } from './reducer/sites.reducer';
 import {
   onGetConnectedUserAsyncFulfilled,
@@ -38,6 +45,9 @@ const autoMateSlice = createSlice({
       .addCase(getSitesAsync.pending, onGetSitesAsyncPending)
       .addCase(getSitesAsync.fulfilled, onGetSitesAsyncFulfilled)
       .addCase(getSitesAsync.rejected, onGetSitesAsyncRejected)
+      .addCase(createRouteAsync.pending, onCreateRouteAsyncPending)
+      .addCase(createRouteAsync.fulfilled, onCreateRouteAsyncFulfilled)
+      .addCase(createRouteAsync.rejected, onCreateRouteAsyncRejected)
 });
 
 export const actions = {
