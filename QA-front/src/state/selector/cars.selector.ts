@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { AutoMateState, Car } from '../interfaces';
-import { selectAreFiltersEmpty } from './common.selector';
+import { selectAreFiltersEmpty, selectSitesFilter } from './common.selector';
 import { selectFilterRoutes } from './routes.selector';
 
 export function selectCars(state: AutoMateState): Car[] {
@@ -11,9 +11,11 @@ export const selectFilteredCars = createSelector(
   selectFilterRoutes,
   selectCars,
   selectAreFiltersEmpty,
-  (filteredRoutes, cars, areFiltersEmpty) => {
+  selectSitesFilter,
+  (filteredRoutes, cars, areFiltersEmpty, site) => {
     if (areFiltersEmpty) return [];
     const usedCarsImmat = filteredRoutes?.map(route => route.car.immatriculation);
-    return cars.filter(car => !usedCarsImmat?.includes(car.immatriculation));
+    console.log(usedCarsImmat);
+    return cars.filter(car => !usedCarsImmat?.includes(car.immatriculation) && car.site === site);
   }
 );

@@ -9,7 +9,8 @@ export async function getCars(): Promise<Car[]> {
       couleur: 'Bleu',
       nbDoors: 5,
       disponibility: false,
-      kilometers: 10000
+      kilometers: 10000,
+      site: 'Nantes'
     },
     {
       immatriculation: 'KO-420-QP',
@@ -18,7 +19,8 @@ export async function getCars(): Promise<Car[]> {
       couleur: 'Bleu',
       nbDoors: 5,
       disponibility: false,
-      kilometers: 10000
+      kilometers: 10000,
+      site: 'Nantes'
     },
     {
       immatriculation: 'UH-038-TH',
@@ -27,7 +29,8 @@ export async function getCars(): Promise<Car[]> {
       couleur: 'Bleu',
       nbDoors: 5,
       disponibility: false,
-      kilometers: 10000
+      kilometers: 10000,
+      site: 'Nantes'
     },
     {
       immatriculation: 'ON-876-WB',
@@ -36,7 +39,8 @@ export async function getCars(): Promise<Car[]> {
       couleur: 'Bleu',
       nbDoors: 3,
       disponibility: false,
-      kilometers: 10000
+      kilometers: 10000,
+      site: 'Niort'
     },
     {
       immatriculation: 'QI-297-CN',
@@ -45,7 +49,8 @@ export async function getCars(): Promise<Car[]> {
       couleur: 'Bleu',
       nbDoors: 5,
       disponibility: false,
-      kilometers: 10000
+      kilometers: 10000,
+      site: 'Rennes'
     },
     {
       immatriculation: 'GF-766-FC',
@@ -54,7 +59,8 @@ export async function getCars(): Promise<Car[]> {
       couleur: 'rouge',
       nbDoors: 2,
       disponibility: false,
-      kilometers: 10000
+      kilometers: 10000,
+      site: 'Rennes'
     }
   ];
 }

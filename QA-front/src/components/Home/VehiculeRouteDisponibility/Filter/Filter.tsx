@@ -34,8 +34,8 @@ export const FilterItem = styled.div`
 interface FilterProps {
   siteOptions: DefaultOptionType[];
   dates: RangeValue;
-  handleDateFilterChange: (val: RangeValue) => void;
-  handleSelectFilterChange: (val: string[]) => void;
+  handleDateFilterChange: any;
+  handleSelectFilterChange: (val: string) => void;
 }
 
 const Filter: FC<FilterProps> = ({ siteOptions, dates, handleSelectFilterChange, handleDateFilterChange }) => (
@@ -44,13 +44,7 @@ const Filter: FC<FilterProps> = ({ siteOptions, dates, handleSelectFilterChange,
       <FilterContainer>
         <FilterItem>
           <FilterTitle>Site de départ</FilterTitle>
-          <Select
-            mode="multiple"
-            allowClear
-            placeholder="Site de départ"
-            options={siteOptions}
-            onChange={handleSelectFilterChange}
-          />
+          <Select allowClear placeholder="Site de départ" options={siteOptions} onChange={handleSelectFilterChange} />
         </FilterItem>
         <FilterItem>
           <FilterTitle>Date de départ</FilterTitle>

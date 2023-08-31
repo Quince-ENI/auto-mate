@@ -11,14 +11,8 @@ export const selectFilterRoutes = createSelector(
   selectRoutes,
   selectSitesFilter,
   selectDatesFilter,
-  (routes, sites, dates) =>
-    routes.filter(
-      route =>
-        sites.includes(route.departureCity) &&
-        dates &&
-        dates[0]?.isBefore(route.departureCity) &&
-        dates[1]?.isAfter(route.departureCity)
-    )
+  (routes, site, dates) =>
+    routes.filter(route => site === route.departureCity && dates && dates[0]?.isSame(route.departureDate, 'day'))
 );
 
 export const selectFilterRoutesFree = createSelector(selectFilterRoutes, selectSites, (filteredRoutes, sites) =>

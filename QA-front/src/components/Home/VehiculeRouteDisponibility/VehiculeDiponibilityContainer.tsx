@@ -30,8 +30,8 @@ const VehiculeDisponibilityContainer: FC = () => {
   const filteredCars = useSelector(selectFilteredCars);
   const dates = useSelector(selectDatesFilter);
 
-  const onSiteFilterChange = (sites: string[]): void => {
-    dispatch(actions.setFilterSite(sites));
+  const onSiteFilterChange = (site: string): void => {
+    dispatch(actions.setFilterSite(site));
   };
 
   const onDateFilterChange = (dates: RangeValue): void => {

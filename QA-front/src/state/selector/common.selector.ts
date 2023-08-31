@@ -1,11 +1,12 @@
 import { AutoMateState, RangeValue } from '../interfaces';
 
 export function selectAreFiltersEmpty(state: AutoMateState): boolean {
-  return state.ui.filter.sites.length === 0;
+  if (state.ui.filter.dates === undefined) return true;
+  return state.ui.filter.site === '' && state.ui.filter.dates[0] === null && state.ui.filter.dates[1] === null;
 }
 
-export function selectSitesFilter(state: AutoMateState): string[] {
-  return state.ui.filter.sites;
+export function selectSitesFilter(state: AutoMateState): string {
+  return state.ui.filter.site;
 }
 
 export function selectDatesFilter(state: AutoMateState): RangeValue {

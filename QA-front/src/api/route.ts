@@ -16,7 +16,8 @@ export async function getRoutes(): Promise<Route[]> {
         couleur: 'Bleu',
         nbDoors: 5,
         disponibility: false,
-        kilometers: 10000
+        kilometers: 10000,
+        site: 'Nantes'
       }
     },
     {
@@ -24,8 +25,8 @@ export async function getRoutes(): Promise<Route[]> {
       arrivalCity: 'Nice',
       remainingPlaces: 2,
       departureTime: '8h',
-      departureDate: new Date('2023-08-01'),
-      arrivalDate: new Date('2023-08-02'),
+      departureDate: new Date('2023-08-05'),
+      arrivalDate: new Date('2023-08-06'),
       car: {
         immatriculation: 'KO-420-QP',
         marque: 'Peugeot',
@@ -33,13 +34,14 @@ export async function getRoutes(): Promise<Route[]> {
         couleur: 'Bleu',
         nbDoors: 5,
         disponibility: false,
-        kilometers: 10000
+        kilometers: 10000,
+        site: 'Nantes'
       }
     },
     {
-      departureCity: 'Niort',
+      departureCity: 'Nantes',
       arrivalCity: 'Paris',
-      remainingPlaces: 0,
+      remainingPlaces: 1,
       departureTime: '6h',
       departureDate: new Date('2023-08-01'),
       arrivalDate: new Date('2023-08-02'),
@@ -50,7 +52,8 @@ export async function getRoutes(): Promise<Route[]> {
         couleur: 'Bleu',
         nbDoors: 5,
         disponibility: false,
-        kilometers: 10000
+        kilometers: 10000,
+        site: 'Nantes'
       }
     },
     {
@@ -67,11 +70,12 @@ export async function getRoutes(): Promise<Route[]> {
         couleur: 'Bleu',
         nbDoors: 3,
         disponibility: false,
-        kilometers: 10000
+        kilometers: 10000,
+        site: 'Niort'
       }
     },
     {
-      departureCity: 'Renne',
+      departureCity: 'Rennes',
       arrivalCity: 'Niort',
       remainingPlaces: 4,
       departureTime: '6h',
@@ -84,7 +88,8 @@ export async function getRoutes(): Promise<Route[]> {
         couleur: 'Bleu',
         nbDoors: 5,
         disponibility: false,
-        kilometers: 10000
+        kilometers: 10000,
+        site: 'Rennes'
       }
     }
   ];

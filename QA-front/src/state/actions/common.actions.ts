@@ -1,8 +1,8 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { AutoMateState, RangeValue } from '../interfaces';
 
-export function onSetFilterSite(state: AutoMateState, { payload: sites }: PayloadAction<string[]>): void {
-  state.ui.filter.sites = sites;
+export function onSetFilterSite(state: AutoMateState, { payload: site }: PayloadAction<string>): void {
+  state.ui.filter.site = site;
 }
 
 export function onSetFilterDates(state: AutoMateState, { payload: dates }: PayloadAction<RangeValue>): void {

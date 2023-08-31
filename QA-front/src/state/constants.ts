@@ -3,7 +3,7 @@ import { AutoMateState } from './interfaces';
 export const INITIAL_STATE: AutoMateState = {
   ui: {
     filter: {
-      sites: [],
+      site: '',
       dates: [null, null]
     },
     carsLoading: false,

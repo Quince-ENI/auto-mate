@@ -1,7 +1,7 @@
 import type { Dayjs } from 'dayjs';
 
 export type Role = 'user' | 'admin';
-export type RangeValue = [Dayjs | null, Dayjs | null] | null;
+export type RangeValue = [Dayjs | null, Dayjs | null] | undefined;
 
 export type User = {
   name: string;
@@ -11,7 +11,7 @@ export type User = {
 };
 
 interface AutoMateUiFilterState {
-  sites: string[];
+  site: string;
   dates: RangeValue;
 }
 interface AutoMateUiState {
@@ -42,6 +42,7 @@ export interface Car {
   nbDoors: number;
   disponibility: boolean;
   kilometers: number;
+  site: string;
 }
 
 export interface Route {
