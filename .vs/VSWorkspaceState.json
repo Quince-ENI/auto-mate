@@ -1,8 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\QA-back"
+    ""
   ],
-  "SelectedNode": "\\QA-back\\auto-mate.sln",
+  "SelectedNode": "\\docker-compose.yml",
   "PreviewInSolutionExplorer": false
 }
