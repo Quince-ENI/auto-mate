@@ -18,7 +18,7 @@ const columns = [
     key: 'departureCity'
   },
   {
-    title: 'Ville d\'arrivée',
+    title: "Ville d'arrivée",
     dataIndex: 'arrivalCity',
     key: 'arrivalCity'
   },
@@ -34,6 +34,8 @@ const columns = [
   }
 ];
 
-const RouteTable: FC<RouteTableProps> = ({ routes }) => <Table columns={columns} dataSource={routes} />;
+const RouteTable: FC<RouteTableProps> = ({ routes }) => (
+  <Table columns={columns} dataSource={routes} style={{ margin: '20px' }} />
+);
 
 export default RouteTable;
