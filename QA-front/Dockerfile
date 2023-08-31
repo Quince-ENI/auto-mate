@@ -1,5 +1,5 @@
 # Étape de construction de l'application React
-FROM node:14 as build
+FROM node:18 as build
 WORKDIR /app
 
 # Copie des fichiers de package.json et package-lock.json pour installer les dépendances
