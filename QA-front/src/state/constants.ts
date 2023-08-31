@@ -3,14 +3,64 @@ import { AutoMateState } from './interfaces';
 export const INITIAL_STATE: AutoMateState = {
   ui: {
     filter: 'test',
-    carsLoading: false
+    carsLoading: false,
+    routesLoading: false, // Ajoutez cette propriété
+    isUserReceive: false // Ajoutez cette propriété
   },
   entities: {
-    isUserLogged: false,
+    isUserLogged: undefined,
+    routes: [
+      {
+        departureCity: 'Nantes',
+        arrivalCity: 'Paris',
+        remainingPlaces: 4,
+        departure_time: '6h',
+        car: {
+          immatriculation: 'EP-123-RP',
+          marque: 'Peugeot',
+          modele: '508',
+          couleur: 'Bleu',
+          nbDoors: 5,
+          disponibility: false,
+          kilometers: 10000
+        }
+      },
+      {
+        departureCity: 'Nantes',
+        arrivalCity: 'Paris',
+        remainingPlaces: 4,
+        departure_time: '6h',
+        car: {
+          immatriculation: 'EP-123-RP',
+          marque: 'Peugeot',
+          modele: '508',
+          couleur: 'Bleu',
+          nbDoors: 5,
+          disponibility: false,
+          kilometers: 10000
+        }
+      },
+      {
+        departureCity: 'Nantes',
+        arrivalCity: 'Paris',
+        remainingPlaces: 4,
+        departure_time: '6h',
+        car: {
+          immatriculation: 'EP-123-RP',
+          marque: 'Peugeot',
+          modele: '508',
+          couleur: 'Bleu',
+          nbDoors: 5,
+          disponibility: false,
+          kilometers: 10000
+        }
+      }
+    ],
     user: {
       name: 'defaultName',
       picture: 'defaultpicture',
-      email: 'defaultMail'
+      email: 'defaultMail',
+      role: 'user'
     },
     cars: [
       {

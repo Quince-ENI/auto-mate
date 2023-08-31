@@ -15,7 +15,7 @@ interface AutoMateUiState {
 }
 
 interface AutoMateEntitiesState {
-  isUserLogged: boolean;
+  isUserLogged?: boolean;
   cars: Car[];
   user: User;
   routes: Route[];
