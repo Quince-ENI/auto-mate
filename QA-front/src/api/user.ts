@@ -5,6 +5,6 @@ export async function getUser(email: string): Promise<User> {
     name: 'Corentin',
     picture: '',
     email: email,
-    role: 'user'
+    role: 'admin'
   };
 }

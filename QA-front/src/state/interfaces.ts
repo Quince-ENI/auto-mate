@@ -1,4 +1,7 @@
+import type { Dayjs } from 'dayjs';
+
 export type Role = 'user' | 'admin';
+export type RangeValue = [Dayjs | null, Dayjs | null] | undefined;
 
 export type User = {
   name: string;
@@ -7,8 +10,12 @@ export type User = {
   role: Role;
 };
 
+interface AutoMateUiFilterState {
+  site: string;
+  dates: RangeValue;
+}
 interface AutoMateUiState {
-  filter: string;
+  filter: AutoMateUiFilterState;
   carsLoading: boolean;
   routesLoading: boolean;
   isUserReceive: boolean;
@@ -19,6 +26,7 @@ interface AutoMateEntitiesState {
   cars: Car[];
   user: User;
   routes: Route[];
+  sites: string[];
 }
 
 export interface AutoMateState {
@@ -34,12 +42,15 @@ export interface Car {
   nbDoors: number;
   disponibility: boolean;
   kilometers: number;
+  site: string;
 }
 
 export interface Route {
   departureCity: string;
   arrivalCity: string;
   remainingPlaces: number;
-  departure_time: string;
+  departureTime: string;
+  departureDate: Date;
+  arrivalDate: Date;
   car: Car;
 }
