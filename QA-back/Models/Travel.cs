@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QA_back.Models;
 
-public class Road
+public class Travel
 {
     [Key]
     public int idRoute { get; set; }
