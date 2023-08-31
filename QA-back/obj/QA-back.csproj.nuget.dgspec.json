@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "T:\\MS2D\\ProjetGroupe\\auto-mate\\QA-back\\QA-back.csproj": {}
+    "D:\\Projet_Groupe\\auto-mate-develop\\auto-mate\\QA-back\\QA-back.csproj": {}
   },
   "projects": {
-    "T:\\MS2D\\ProjetGroupe\\auto-mate\\QA-back\\QA-back.csproj": {
+    "D:\\Projet_Groupe\\auto-mate-develop\\auto-mate\\QA-back\\QA-back.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "T:\\MS2D\\ProjetGroupe\\auto-mate\\QA-back\\QA-back.csproj",
+        "projectUniqueName": "D:\\Projet_Groupe\\auto-mate-develop\\auto-mate\\QA-back\\QA-back.csproj",
         "projectName": "QA-back",
-        "projectPath": "T:\\MS2D\\ProjetGroupe\\auto-mate\\QA-back\\QA-back.csproj",
+        "projectPath": "D:\\Projet_Groupe\\auto-mate-develop\\auto-mate\\QA-back\\QA-back.csproj",
         "packagesPath": "C:\\Users\\jayal\\.nuget\\packages\\",
-        "outputPath": "T:\\MS2D\\ProjetGroupe\\auto-mate\\QA-back\\obj\\",
+        "outputPath": "D:\\Projet_Groupe\\auto-mate-develop\\auto-mate\\QA-back\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -58,6 +58,16 @@
               "target": "Package",
               "version": "[7.0.10, )"
             },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.10, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -69,7 +79,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -81,7 +92,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

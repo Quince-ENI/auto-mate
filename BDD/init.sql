@@ -18,6 +18,26 @@ DROP DATABASE IF EXISTS `automatebdd`;
 CREATE DATABASE IF NOT EXISTS `automatebdd` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `automatebdd`;
 
+-- Listage de la structure de la table automatebdd. key
+DROP TABLE IF EXISTS `key`;
+CREATE TABLE IF NOT EXISTS `key` (
+  `idKey` int(11) NOT NULL AUTO_INCREMENT,
+  `location` varchar(50) NOT NULL,
+  `available` tinyint(4) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`idKey`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Listage des données de la table automatebdd.key : ~5 rows (environ)
+DELETE FROM `key`;
+/*!40000 ALTER TABLE `key` DISABLE KEYS */;
+INSERT INTO `key` (`idKey`, `location`, `available`) VALUES
+	(11, 'Paris', 1),
+	(12, 'Lyon', 0),
+	(13, 'Marseille', 1),
+	(14, 'Toulouse', 1),
+	(15, 'Bordeaux', 1);
+/*!40000 ALTER TABLE `key` ENABLE KEYS */;
+
 -- Listage de la structure de la table automatebdd. car
 DROP TABLE IF EXISTS `car`;
 CREATE TABLE IF NOT EXISTS `car` (
@@ -33,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `car` (
   `key` int(11) DEFAULT NULL,
   PRIMARY KEY (`idCar`),
   KEY `FK_car_key` (`key`),
-  CONSTRAINT `FK_car_key` FOREIGN KEY (`key`) REFERENCES `key` (`idKey`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_car_key` FOREIGN KEY (`key`) REFERENCES `key` (`idKey`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Listage des données de la table automatebdd.car : ~5 rows (environ)
@@ -47,28 +67,37 @@ INSERT INTO `car` (`idCar`, `Immatriculation`, `Type`, `Marque`, `Modele`, `Coul
 	(20, 'MNO345', 'SUV', 'Nissan', 'Qashqai', 'Gris', 5, 1, 6000, 15);
 /*!40000 ALTER TABLE `car` ENABLE KEYS */;
 
--- Listage de la structure de la table automatebdd. key
-DROP TABLE IF EXISTS `key`;
-CREATE TABLE IF NOT EXISTS `key` (
-  `idKey` int(11) NOT NULL AUTO_INCREMENT,
-  `location` varchar(50) NOT NULL,
-  `available` tinyint(4) NOT NULL DEFAULT 0,
-  `car` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idKey`) USING BTREE,
-  KEY `FK_key_car` (`car`),
-  CONSTRAINT `FK_key_car` FOREIGN KEY (`car`) REFERENCES `car` (`idCar`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Listage de la structure de la table automatebdd. user
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
+  `registration_number` int(7) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL DEFAULT '0',
+  `first_name` varchar(50) NOT NULL DEFAULT '0',
+  `mail` varchar(100) NOT NULL DEFAULT '0',
+  `tel` varchar(10) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `role` enum('user','responsable') NOT NULL DEFAULT 'user',
+  PRIMARY KEY (`registration_number`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Listage des données de la table automatebdd.key : ~5 rows (environ)
-DELETE FROM `key`;
-/*!40000 ALTER TABLE `key` DISABLE KEYS */;
-INSERT INTO `key` (`idKey`, `location`, `available`, `car`) VALUES
-	(11, 'Paris', 1, 16),
-	(12, 'Lyon', 0, 17),
-	(13, 'Marseille', 1, 18),
-	(14, 'Toulouse', 1, 19),
-	(15, 'Bordeaux', 1, 20);
-/*!40000 ALTER TABLE `key` ENABLE KEYS */;
+-- Listage des données de la table automatebdd.user : ~11 rows (environ)
+DELETE FROM `user`;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` (`registration_number`, `name`, `first_name`, `mail`, `tel`, `password`, `role`) VALUES
+	(11, 'Dubois', 'Pierre', 'pierre.dubois@mail.com', '1234567890', 'password', 'responsable'),
+	(12, 'Leroy', 'Marie', 'marie.leroy@mail.com', '9876543210', 'password', 'user'),
+	(13, 'Moreau', 'Jean', 'jean.moreau@mail.com', '2345678901', 'password', 'user'),
+	(14, 'Roy', 'Julie', 'julie.roy@mail.com', '3456789012', 'pass123', 'responsable'),
+	(15, 'Lavoie', 'David', 'david.lavoie@mail.com', '4567890123', 'pass123', 'user'),
+	(16, 'Gauthier', 'Sophie', 'sophie.gauthier@mail.com', '5678901234', 'pass123', 'user'),
+	(17, 'Martinez', 'Alexandre', 'alexandre.martinez@mail.com', '6789012345', 'pass123', 'responsable'),
+	(18, 'Tremblay', 'Émilie', 'emilie.tremblay@mail.com', '7890123456', 'pass123', 'user'),
+	(19, 'Smith', 'Michael', 'michael.smith@mail.com', '8901234567', 'pass123', 'responsable'),
+	(20, 'Johnson', 'Jessica', 'jessica.johnson@mail.com', '9012345678', 'pass123', 'user'),
+	(21, 'Chen', 'David', 'david.chen@mail.com', '0123456789', 'pass123', 'responsable');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+
+
 
 -- Listage de la structure de la table automatebdd. site
 DROP TABLE IF EXISTS `site`;
@@ -126,35 +155,6 @@ INSERT INTO `travel` (`idRoute`, `departure_city`, `arrival_city`, `departure_ti
 	(5, 'Marseille', 'Nice', '2023-07-05 10:00:00', '2023-07-05 15:00:00', 5, 1, 15, 20);
 /*!40000 ALTER TABLE `travel` ENABLE KEYS */;
 
--- Listage de la structure de la table automatebdd. user
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE IF NOT EXISTS `user` (
-  `registration_number` int(7) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL DEFAULT '0',
-  `first_name` varchar(50) NOT NULL DEFAULT '0',
-  `mail` varchar(100) NOT NULL DEFAULT '0',
-  `tel` varchar(10) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
-  `role` enum('user','responsable') NOT NULL DEFAULT 'user',
-  PRIMARY KEY (`registration_number`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Listage des données de la table automatebdd.user : ~11 rows (environ)
-DELETE FROM `user`;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`registration_number`, `name`, `first_name`, `mail`, `tel`, `password`, `role`) VALUES
-	(11, 'Dubois', 'Pierre', 'pierre.dubois@mail.com', '1234567890', 'password', 'responsable'),
-	(12, 'Leroy', 'Marie', 'marie.leroy@mail.com', '9876543210', 'password', 'user'),
-	(13, 'Moreau', 'Jean', 'jean.moreau@mail.com', '2345678901', 'password', 'user'),
-	(14, 'Roy', 'Julie', 'julie.roy@mail.com', '3456789012', 'pass123', 'responsable'),
-	(15, 'Lavoie', 'David', 'david.lavoie@mail.com', '4567890123', 'pass123', 'user'),
-	(16, 'Gauthier', 'Sophie', 'sophie.gauthier@mail.com', '5678901234', 'pass123', 'user'),
-	(17, 'Martinez', 'Alexandre', 'alexandre.martinez@mail.com', '6789012345', 'pass123', 'responsable'),
-	(18, 'Tremblay', 'Émilie', 'emilie.tremblay@mail.com', '7890123456', 'pass123', 'user'),
-	(19, 'Smith', 'Michael', 'michael.smith@mail.com', '8901234567', 'pass123', 'responsable'),
-	(20, 'Johnson', 'Jessica', 'jessica.johnson@mail.com', '9012345678', 'pass123', 'user'),
-	(21, 'Chen', 'David', 'david.chen@mail.com', '0123456789', 'pass123', 'responsable');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
