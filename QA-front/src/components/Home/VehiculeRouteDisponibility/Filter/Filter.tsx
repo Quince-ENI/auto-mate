@@ -3,7 +3,7 @@ import { Card, DatePicker, Select } from 'antd';
 import { DefaultOptionType } from 'antd/es/select';
 import { FC } from 'react';
 import { styled } from 'styled-components';
-import { RangeValue } from '../VehiculeDiponibilityContainer';
+import { RangeValue } from '../../../../state/interfaces';
 
 const { RangePicker } = DatePicker;
 
@@ -34,12 +34,11 @@ export const FilterItem = styled.div`
 interface FilterProps {
   siteOptions: DefaultOptionType[];
   dates: RangeValue;
-  value: RangeValue;
-  handleDateFilterChange: (val: any) => void;
+  handleDateFilterChange: (val: RangeValue) => void;
   handleSelectFilterChange: (val: string[]) => void;
 }
 
-const Filter: FC<FilterProps> = ({ siteOptions, dates, value, handleSelectFilterChange, handleDateFilterChange }) => (
+const Filter: FC<FilterProps> = ({ siteOptions, dates, handleSelectFilterChange, handleDateFilterChange }) => (
   <>
     <FilterCard>
       <FilterContainer>
@@ -55,7 +54,7 @@ const Filter: FC<FilterProps> = ({ siteOptions, dates, value, handleSelectFilter
         </FilterItem>
         <FilterItem>
           <FilterTitle>Date de départ</FilterTitle>
-          <RangePicker value={dates || value} onChange={handleDateFilterChange} changeOnBlur />
+          <RangePicker value={dates} onChange={handleDateFilterChange} changeOnBlur />
         </FilterItem>
       </FilterContainer>
     </FilterCard>

@@ -2,7 +2,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { getCarsAsync } from '../state/actions/cars.actions';
 import { onGetCarsAsyncFulfilled, onGetCarsAsyncPending, onGetCarsAsyncRejected } from '../state/reducer/cars.reducer';
-import { onSetFilterSite } from './actions/common.actions';
+import { onSetFilterDates, onSetFilterSite } from './actions/common.actions';
 import { getRoutesAsync } from './actions/routes.actions';
 import { getSitesAsync } from './actions/sites.actions';
 import { getConnectedUserAsync } from './actions/user.actions';
@@ -21,7 +21,8 @@ const autoMateSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
     setIsUserLogged: onSetIsUserLogged,
-    setFilterSite: onSetFilterSite
+    setFilterSite: onSetFilterSite,
+    setFilterDates: onSetFilterDates
   },
   extraReducers: builder =>
     builder
