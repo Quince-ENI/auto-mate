@@ -5,7 +5,7 @@ import { getToken } from './api/jwt';
 import Home from './components/Home/Home';
 import AutoMateLayout from './components/Layout/AutoMateLayout';
 import LoginPage from './components/Login/LoginPage';
-import RequestList from './components/Request/RequestList';
+import Request from './components/Request/Request';
 import UserRoute from './components/Route/UserRoute';
 import Vehicules from './components/Vehicules/Vehicules';
 import { getCarsAsync } from './state/actions/cars.actions';
@@ -34,7 +34,7 @@ function App(): ReactElement {
           <Route path="home" element={<Home />} />
           <Route path="route" element={<UserRoute />} />
           <Route path="vehicules" element={<Vehicules />} />
-          <Route path="request" element={<RequestList />} />
+          <Route path="request" element={<Request />} />
         </Route>
       </Routes>
     </div>
