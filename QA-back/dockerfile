@@ -1,16 +1,12 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /app
 
-# Copier les fichiers de projet et restaurer les dépendances
-COPY *.csproj .
-RUN dotnet restore
-
 # Copier et construire l'application
 COPY . .
-RUN dotnet publish -c Release -o out
+RUN dotnet restore
+RUN dotnet publish -c Release -o /build
 
-# Exposer le port d'écoute de l'application
-EXPOSE 80
-
-# Définir la commande de démarrage de l'application
-ENTRYPOINT ["dotnet", "bin/Debug/net6.0/QA-back.dll"]
+FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine as runtime
+WORKDIR /app
+COPY --from=build /build /app
+ENTRYPOINT [ "dotnet", "QA-back.dll" ]
