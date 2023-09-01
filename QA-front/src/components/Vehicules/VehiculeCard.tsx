@@ -1,58 +1,63 @@
 import { Button, Card } from 'antd';
 import React, { useState } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { styled } from 'styled-components';
 import { Car } from '../../state/interfaces';
 import './VehiculeCard.css';
 
 interface VehicleCardProps {
   car: Car;
 }
+type ToggleInfo = () => void;
+
+const VehiculeStyledCard = styled(Card)`
+  width: 400;
+  margin: 16px auto;
+  padding: 16px;
+`;
+
+const VehicleCardContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  position: relative;
+`;
+
+const ToggleInfoButtonContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 16px;
+`;
+
+const ContentTitle = styled.div`
+  width: 70%;
+`;
 
 const VehicleCard: React.FC<VehicleCardProps> = ({ car }) => {
   const [showInfo, setShowInfo] = useState(false);
 
-  const toggleInfo = () => {
+  const toggleInfo: ToggleInfo = () => {
     setShowInfo(!showInfo);
   };
 
   return (
-    <Card
-      style={{
-        width: 400,
-        margin: '16px auto',
-        padding: 16
-      }}
-      bodyStyle={{ padding: 0 }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: 16,
-          position: 'relative'
-        }}
-      >
-        <div style={{ width: '70%' }}>
+    <VehiculeStyledCard bodyStyle={{ padding: 0 }}>
+      <VehicleCardContent>
+        <ContentTitle>
           <p>
             <strong>
               {car.marque} {car.modele}
             </strong>
           </p>
-        </div>
-        <div
-          style={{
-            position: 'absolute',
-            top: '50%',
-            transform: 'translateY(-50%)',
-            right: 16
-          }}
-        >
+        </ContentTitle>
+        <ToggleInfoButtonContainer>
           <Button type="primary" onClick={toggleInfo}>
             {showInfo ? 'Masquer Info' : 'Afficher Info'}
           </Button>
-        </div>
-      </div>
+        </ToggleInfoButtonContainer>
+      </VehicleCardContent>
       <CSSTransition in={showInfo} timeout={300} classNames="fade" unmountOnExit>
         <div>
           <p>
@@ -75,7 +80,7 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ car }) => {
           </p>
         </div>
       </CSSTransition>
-    </Card>
+    </VehiculeStyledCard>
   );
 };
 

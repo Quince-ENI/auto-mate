@@ -1,21 +1,11 @@
 import { Col, Row } from 'antd';
-import React, { useEffect, useState } from 'react';
-import { getCars } from '../../api/cars';
-import { Car } from '../../state/interfaces';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectCars } from '../../state/selector/cars.selector';
 import VehiculeCard from './VehiculeCard';
 
 const Vehicles: React.FC = () => {
-  const [cars, setCars] = useState<Car[]>([]);
-
-  useEffect(() => {
-    async function fetchCars() {
-      const carsData = await getCars();
-      setCars(carsData);
-    }
-
-    fetchCars();
-  }, []);
-
+  const cars = useSelector(selectCars);
   return (
     <div>
       <Row gutter={16}>
