@@ -9,5 +9,4 @@ public class Key
     public int idKey { get; set; }
     public string? location { get; set; }
     public int available { get; set; }
-    public int car { get; set; }
 }
