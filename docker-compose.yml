@@ -35,10 +35,11 @@ services:
       - db_data:/var/lib/mysql
     networks:
       - my-network
-      
+
 volumes:
   db_data:
     external: true
 
 networks:
-  - my-network
+  my-network:
+    driver: bridge
