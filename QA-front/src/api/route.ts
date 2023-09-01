@@ -3,6 +3,8 @@ import { Route } from '../state/interfaces';
 export async function getRoutes(): Promise<Route[]> {
   return [
     {
+      user: 'Pierre-Louis PAUGAM',
+      status: 'validated',
       departureCity: 'Nantes',
       arrivalCity: 'Paris',
       remainingPlaces: 4,
@@ -21,6 +23,8 @@ export async function getRoutes(): Promise<Route[]> {
       }
     },
     {
+      user: 'Pierre-Louis PAUGAM',
+      status: 'pending',
       departureCity: 'Nantes',
       arrivalCity: 'Nice',
       remainingPlaces: 2,
@@ -39,6 +43,8 @@ export async function getRoutes(): Promise<Route[]> {
       }
     },
     {
+      user: 'Pierre-Louis PAUGAM',
+      status: 'ended',
       departureCity: 'Nantes',
       arrivalCity: 'Paris',
       remainingPlaces: 1,
@@ -57,6 +63,8 @@ export async function getRoutes(): Promise<Route[]> {
       }
     },
     {
+      user: 'Pierre-Louis PAUGAM',
+      status: 'validated',
       departureCity: 'Niort',
       arrivalCity: 'Nantes',
       remainingPlaces: 2,
@@ -75,6 +83,8 @@ export async function getRoutes(): Promise<Route[]> {
       }
     },
     {
+      user: 'Pierre-Louis PAUGAM',
+      status: 'validated',
       departureCity: 'Rennes',
       arrivalCity: 'Niort',
       remainingPlaces: 4,

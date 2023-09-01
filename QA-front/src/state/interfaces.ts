@@ -2,6 +2,7 @@ import type { Dayjs } from 'dayjs';
 
 export type Role = 'user' | 'admin';
 export type RangeValue = [Dayjs | null, Dayjs | null] | undefined;
+export type Status = 'validated' | 'pending' | 'ended';
 
 export type User = {
   name: string;
@@ -46,6 +47,8 @@ export interface Car {
 }
 
 export interface Route {
+  user: string;
+  status: Status;
   departureCity: string;
   arrivalCity: string;
   remainingPlaces: number;
