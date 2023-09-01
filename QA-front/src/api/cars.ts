@@ -1,66 +1,7 @@
 import { Car } from '../state/interfaces';
+import { apiClient } from './client';
 
 export async function getCars(): Promise<Car[]> {
-  return [
-    {
-      immatriculation: 'QR-384-RP',
-      marque: 'Peugeot',
-      modele: '508',
-      couleur: 'Bleu',
-      nbDoors: 5,
-      disponibility: false,
-      kilometers: 10000,
-      site: 'Nantes'
-    },
-    {
-      immatriculation: 'KO-420-QP',
-      marque: 'Peugeot',
-      modele: '3008',
-      couleur: 'Bleu',
-      nbDoors: 5,
-      disponibility: false,
-      kilometers: 10000,
-      site: 'Nantes'
-    },
-    {
-      immatriculation: 'UH-038-TH',
-      marque: 'Citroen',
-      modele: 'c3',
-      couleur: 'Bleu',
-      nbDoors: 5,
-      disponibility: false,
-      kilometers: 10000,
-      site: 'Nantes'
-    },
-    {
-      immatriculation: 'ON-876-WB',
-      marque: 'Fiat',
-      modele: '500',
-      couleur: 'Bleu',
-      nbDoors: 3,
-      disponibility: false,
-      kilometers: 10000,
-      site: 'Niort'
-    },
-    {
-      immatriculation: 'QI-297-CN',
-      marque: 'Peugeot',
-      modele: '508',
-      couleur: 'Bleu',
-      nbDoors: 5,
-      disponibility: false,
-      kilometers: 10000,
-      site: 'Rennes'
-    },
-    {
-      immatriculation: 'GF-766-FC',
-      marque: 'Ferrari',
-      modele: 'pista',
-      couleur: 'rouge',
-      nbDoors: 2,
-      disponibility: false,
-      kilometers: 10000,
-      site: 'Rennes'
-    }
-  ];
+  const { data: cars } = await apiClient.get<Car[]>('/api/Car');
+  return cars;
 }
