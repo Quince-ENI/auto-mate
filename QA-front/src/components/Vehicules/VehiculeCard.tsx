@@ -1,6 +1,8 @@
 import { Button, Card } from 'antd';
 import React, { useState } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import { Car } from '../../state/interfaces';
+import './VehiculeCard.css';
 
 interface VehicleCardProps {
   car: Car;
@@ -15,24 +17,64 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ car }) => {
 
   return (
     <Card
-      title={`${car.marque} ${car.modele}`}
-      extra={
-        <Button type="primary" onClick={toggleInfo}>
-          Information
-        </Button>
-      }
-      style={{ margin: '16px', width: 300 }}
+      style={{
+        width: 400,
+        margin: '16px auto',
+        padding: 16
+      }}
+      bodyStyle={{ padding: 0 }}
     >
-      {showInfo && (
-        <>
-          <p>Immatriculation: {car.immatriculation}</p>
-          <p>Couleur: {car.couleur}</p>
-          <p>Nombre de portes: {car.nbDoors}</p>
-          <p>Disponibilité: {car.disponibility ? 'Disponible' : 'Non disponible'}</p>
-          <p>Kilomètres: {car.kilometers} km</p>
-          <p>Site: {car.site}</p>
-        </>
-      )}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 16,
+          position: 'relative'
+        }}
+      >
+        <div style={{ width: '70%' }}>
+          <p>
+            <strong>
+              {car.marque} {car.modele}
+            </strong>
+          </p>
+        </div>
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            right: 16
+          }}
+        >
+          <Button type="primary" onClick={toggleInfo}>
+            {showInfo ? 'Masquer Info' : 'Afficher Info'}
+          </Button>
+        </div>
+      </div>
+      <CSSTransition in={showInfo} timeout={300} classNames="fade" unmountOnExit>
+        <div>
+          <p>
+            <strong>Immatriculation:</strong> {car.immatriculation}
+          </p>
+          <p>
+            <strong>Couleur:</strong> {car.couleur}
+          </p>
+          <p>
+            <strong>Nombre de portes:</strong> {car.nbDoors}
+          </p>
+          <p>
+            <strong>Disponibilité:</strong> {car.disponibility ? 'Disponible' : 'Non disponible'}
+          </p>
+          <p>
+            <strong>Kilomètres:</strong> {car.kilometers} km
+          </p>
+          <p>
+            <strong>Site:</strong> {car.site}
+          </p>
+        </div>
+      </CSSTransition>
     </Card>
   );
 };
