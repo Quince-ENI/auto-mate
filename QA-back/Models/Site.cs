@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace QA_back.Models;
 
+[Table("site")]
 public class Site
 {
     [Key]
