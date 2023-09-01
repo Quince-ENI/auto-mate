@@ -5,8 +5,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
-    volumes:
-      - ./certificates:/certificates:ro
+#    volumes:
+#      - ./certificates:/certificates:ro
     depends_on:
       - back  
   back:

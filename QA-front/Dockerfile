@@ -1,22 +1,20 @@
 # Étape de construction de l'application React
-FROM node:latest as build
+FROM node:18 as build
 WORKDIR /app
 
 # Copie des fichiers de package.json et package-lock.json pour installer les dépendances
 COPY package.json package-lock.json ./
+COPY . .
 
 # Installation des dépendances
 RUN npm install
 RUN npm install vite --save-dev
 
-# Copie des fichiers de l'application
-COPY . .
-
 # Construction de l'application React
 RUN npm run build
 
-# Exposition du port 80 pour le serveur nginx
-EXPOSE 80
+EXPOSE 3000
 
 # Commande d'exécution de l'application (ici, nous utilisons le serveur de développement Vite)
-CMD ["npm", "run", "dev", "--", "--no-open"]
+CMD ["npm", "run", "start"]
+
