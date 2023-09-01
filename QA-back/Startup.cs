@@ -1,6 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Pomelo.EntityFrameworkCore.MySql;
 using Microsoft.OpenApi.Models;
 using System;
+using Microsoft.Extensions.Options;
 
 
 namespace QA_back
@@ -23,11 +26,8 @@ namespace QA_back
 
             services.AddDbContext<Context>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
-                new MySqlServerVersion(new Version(10,10,2))));
-
-            //services.AddDbContext<Context>(options =>
-            //    options.UseSqlServer(
-            //        Configuration.GetConnectionString("DefaultConnection")));
+                                        new MySqlServerVersion(new System.Version(10, 10, 2))));
+            //options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
             // Ajoutez d'autres services ici
             services.AddSwaggerGen(c =>
