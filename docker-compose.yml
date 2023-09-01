@@ -8,7 +8,9 @@ services:
 #    volumes:
 #      - ./certificates:/certificates:ro
     depends_on:
-      - back  
+      - back 
+    networks:
+      - my-network
   back:
     build:
       context: ./QA-back
@@ -16,11 +18,10 @@ services:
     ports:
       - 8000:8000  
     depends_on:
-      - db  
+      - db
+    networks:
+      - my-network
   db:
-    # build:
-    #   context: ./BDD
-    #   dockerfile: Dockerfile
     image: mariadb:11
     ports:
       - 3306:3306
@@ -32,6 +33,13 @@ services:
     volumes:
       - ./BDD/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       - db_data:/var/lib/mysql
+    networks:
+      - my-network
+
 volumes:
   db_data:
     external: true
+
+networks:
+  my-network:
+    driver: bridge
