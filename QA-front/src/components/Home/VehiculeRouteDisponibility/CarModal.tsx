@@ -42,7 +42,7 @@ function useCarForm(
           route: {
             departureCity: departureCity,
             arrivalCity: values.destination,
-            departureTime: values.departureTime.toString(),
+            departureTime: values.departureTime.format('HH:mm').toString(),
             departureDate: departureDate ? departureDate.toDate() : new Date()
             // arrivalTime: returnDate ? returnDate.toDate() : new Date()
             // car: immatriculation
