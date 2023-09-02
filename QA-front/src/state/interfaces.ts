@@ -12,6 +12,15 @@ export type User = {
   role: Role;
 };
 
+export type Site = {
+  idSite: number;
+  name: string;
+  address: string;
+  city: string;
+  departement: 75;
+  postal_code: 75000;
+};
+
 interface AutoMateUiFilterState {
   site: string;
   dates: RangeValue;
@@ -28,7 +37,7 @@ interface AutoMateEntitiesState {
   cars: Car[];
   user: User;
   routes: Route[];
-  sites: string[];
+  sites: Site[];
 }
 
 export interface AutoMateState {
@@ -41,20 +50,20 @@ export interface Car {
   marque: string;
   modele: string;
   couleur: string;
-  nbDoors: number;
+  nb_Portes: number;
   disponibility: boolean;
   kilometers: number;
-  site: string;
+  site: Site;
 }
 
 export interface Route {
   user: string;
   status: Status;
-  departureCity: string;
-  arrivalCity: string;
-  remainingPlaces: number;
-  departureTime: string;
-  departureDate: Date;
-  arrivalDate: Date;
+  departure_city: string;
+  arrival_city: string;
+  remaining_seats: number;
+  departureHour: string;
+  departure_time: Date;
+  arrival_time: Date;
   car: Car;
 }

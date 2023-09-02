@@ -1,4 +1,4 @@
-import { AutoMateState } from '../interfaces';
+import { AutoMateState, Site } from '../interfaces';
 import { FulfilledAction } from '../redux';
 
 export function onGetSitesAsyncPending(state: AutoMateState): void {
@@ -9,7 +9,7 @@ export function onGetSitesAsyncRejected(state: AutoMateState): void {
   state.ui.isUserReceive = false;
 }
 
-export function onGetSitesAsyncFulfilled(state: AutoMateState, { payload: sites }: FulfilledAction<string[]>): void {
+export function onGetSitesAsyncFulfilled(state: AutoMateState, { payload: sites }: FulfilledAction<Site[]>): void {
   state.entities.sites = sites;
   state.ui.isUserReceive = false;
 }

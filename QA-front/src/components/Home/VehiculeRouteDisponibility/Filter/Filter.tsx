@@ -2,8 +2,10 @@ import { Card, DatePicker, Select } from 'antd';
 
 import { DefaultOptionType } from 'antd/es/select';
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { styled } from 'styled-components';
 import { RangeValue } from '../../../../state/interfaces';
+import { selectSitesFilter } from '../../../../state/selector/common.selector';
 
 const { RangePicker } = DatePicker;
 
@@ -38,21 +40,30 @@ interface FilterProps {
   handleSelectFilterChange: (val: string) => void;
 }
 
-const Filter: FC<FilterProps> = ({ siteOptions, dates, handleSelectFilterChange, handleDateFilterChange }) => (
-  <>
-    <FilterCard>
-      <FilterContainer>
-        <FilterItem>
-          <FilterTitle>Site de départ</FilterTitle>
-          <Select allowClear placeholder="Site de départ" options={siteOptions} onChange={handleSelectFilterChange} />
-        </FilterItem>
-        <FilterItem>
-          <FilterTitle>Date de départ</FilterTitle>
-          <RangePicker value={dates} onChange={handleDateFilterChange} changeOnBlur />
-        </FilterItem>
-      </FilterContainer>
-    </FilterCard>
-  </>
-);
+const Filter: FC<FilterProps> = ({ siteOptions, dates, handleSelectFilterChange, handleDateFilterChange }) => {
+  const filterSite = useSelector(selectSitesFilter);
+  return (
+    <>
+      <FilterCard>
+        <FilterContainer>
+          <FilterItem>
+            <FilterTitle>Site de départ</FilterTitle>
+            <Select
+              allowClear
+              placeholder="Site de départ"
+              options={siteOptions}
+              onChange={handleSelectFilterChange}
+              value={filterSite}
+            />
+          </FilterItem>
+          <FilterItem>
+            <FilterTitle>Date de départ</FilterTitle>
+            <RangePicker value={dates} onChange={handleDateFilterChange} changeOnBlur />
+          </FilterItem>
+        </FilterContainer>
+      </FilterCard>
+    </>
+  );
+};
 
 export default Filter;

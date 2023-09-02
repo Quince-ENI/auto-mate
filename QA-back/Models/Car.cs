@@ -19,4 +19,7 @@ public class Car
     [Column("Nombre de Km")]
     public int Nb_Km { get; set; }
     public int key { get; set; }
+    public int idSite { get; set; }
+    [ForeignKey("idSite")]
+    public Site Site { get; set; }
 }

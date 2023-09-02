@@ -16,6 +16,6 @@ export const selectFilteredCars = createSelector(
     if (areFiltersEmpty) return [];
     const usedCarsImmat = filteredRoutes?.map(route => route.car.immatriculation);
     console.log(usedCarsImmat);
-    return cars.filter(car => !usedCarsImmat?.includes(car.immatriculation) && car.site === site);
+    return cars.filter(car => !usedCarsImmat?.includes(car.immatriculation) && car.site.city === site);
   }
 );

@@ -1,5 +1,5 @@
-import { AutoMateState } from '../interfaces';
+import { AutoMateState, Site } from '../interfaces';
 
-export function selectSites(state: AutoMateState): string[] {
+export function selectSites(state: AutoMateState): Site[] {
   return state.entities.sites;
 }

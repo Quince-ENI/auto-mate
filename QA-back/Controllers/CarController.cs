@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QA_back.Models;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace QA_back.Controllers
@@ -21,7 +22,7 @@ namespace QA_back.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Car>> GetCars()
         {
-            return _context.Car.ToList();
+            return _context.Car.Include(t => t.Site).ToList();
         }
 
         // GET: Car/5
