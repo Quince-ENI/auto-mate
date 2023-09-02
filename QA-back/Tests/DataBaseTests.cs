@@ -27,7 +27,8 @@ namespace QA_back.Tests  // Assurez-vous d'avoir un espace de noms approprié po
                 remaining_seats = 3,
                 carpooling = 1,  // Supposons que c'est ouvert au covoiturage
                 user = 123,      // Supposons qu'il s'agit de l'ID d'un utilisateur fictif. Assurez-vous que cet ID est valide ou n'est pas nécessaire pour ce test.
-                car = 456        // De même, supposez que c'est l'ID d'une voiture fictive. Assurez-vous que cet ID est valide ou n'est pas nécessaire pour ce test.
+                idCar = 456      // De même, supposez que c'est l'ID d'une voiture fictive. Assurez-vous que cet ID est valide ou n'est pas nécessaire pour ce test.
+                
             };
 
 

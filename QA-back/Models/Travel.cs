@@ -15,5 +15,7 @@ public class Travel
     public int remaining_seats { get; set; }
     public int carpooling { get; set; }
     public int user { get; set; }
-    public int car { get; set; }
+    public int idCar { get; set; }
+    [ForeignKey("idCar")]
+    public Car Car { get; set; }
 }

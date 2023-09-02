@@ -136,18 +136,18 @@ CREATE TABLE IF NOT EXISTS `travel` (
   `remaining_seats` int(11) NOT NULL DEFAULT 0,
   `carpooling` tinyint(4) NOT NULL DEFAULT 0,
   `user` int(11) DEFAULT NULL,
-  `car` int(11) DEFAULT NULL,
+  `idCar` int(11) DEFAULT NULL,
   PRIMARY KEY (`idRoute`) USING BTREE,
   KEY `FK_route_user` (`user`),
-  KEY `FK_route_car` (`car`),
-  CONSTRAINT `FK_route_car` FOREIGN KEY (`car`) REFERENCES `car` (`idCar`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  KEY `FK_route_car` (`idCar`),
+  CONSTRAINT `FK_route_car` FOREIGN KEY (`idCar`) REFERENCES `car` (`idCar`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_route_user` FOREIGN KEY (`user`) REFERENCES `user` (`registration_number`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Listage des données de la table automatebdd.travel : ~5 rows (environ)
 DELETE FROM `travel`;
 /*!40000 ALTER TABLE `travel` DISABLE KEYS */;
-INSERT INTO `travel` (`idRoute`, `departure_city`, `arrival_city`, `departure_time`, `arrival_time`, `remaining_seats`, `carpooling`, `user`, `car`) VALUES
+INSERT INTO `travel` (`idRoute`, `departure_city`, `arrival_city`, `departure_time`, `arrival_time`, `remaining_seats`, `carpooling`, `user`, `idCar`) VALUES
 	(1, 'Paris', 'Lyon', '2023-07-02 10:00:00', '2023-07-02 14:00:00', 2, 1, 11, 16),
 	(2, 'Lyon', 'Paris', '2023-07-02 16:00:00', '2023-07-02 20:00:00', 4, 0, 12, 17),
 	(3, 'Paris', 'Marseille', '2023-07-03 09:00:00', '2023-07-03 15:00:00', 3, 1, 13, 18),
