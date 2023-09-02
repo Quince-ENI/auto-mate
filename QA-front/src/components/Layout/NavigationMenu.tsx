@@ -41,7 +41,7 @@ const NavigationMenu: FC = () => {
     getItem(<Link to="/request">Demandes</Link>, 'request')
   ];
 
-  const items = userRole === 'admin' ? adminItems.concat(defaultItems) : defaultItems;
+  const items = userRole === 'responsable' ? adminItems.concat(defaultItems) : defaultItems;
 
   return (
     <StyledHeader>

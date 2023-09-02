@@ -5,6 +5,7 @@ export type RangeValue = [Dayjs | null, Dayjs | null] | undefined;
 export type Status = 'validated' | 'pending' | 'ended';
 
 export type User = {
+  userId?: string;
   name: string;
   picture: string;
   email: string;

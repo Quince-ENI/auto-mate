@@ -1,10 +1,7 @@
 import { User } from '../state/interfaces';
+import { apiClient } from './client';
 
 export async function getUser(email: string): Promise<User> {
-  return {
-    name: 'Corentin',
-    picture: '',
-    email: email,
-    role: 'admin'
-  };
+  const { data: user } = await apiClient.get<User>(`/api/User/byEmail?mail=${email}`);
+  return user;
 }
