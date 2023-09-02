@@ -19,4 +19,6 @@ public class Car
     [Column("Nombre de Km")]
     public int Nb_Km { get; set; }
     public int key { get; set; }
+    [ForeignKey("travel")]
+    public ICollection<Travel> Travels { get; set; }
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QA_back.Models;
 using System.Diagnostics;
 using System.Linq;
@@ -33,6 +34,19 @@ public class TravelController : ControllerBase
         {
             return NotFound();
         }
+        return travel;
+    }
+
+    [HttpGet("{id}/with-car")]
+    public ActionResult<Travel> GetTravelWithCar(int id)
+    {
+        var travel = _context.Travel.Include(t => t.Car).SingleOrDefault(t => t.idCar == id);
+
+        if (travel == null)
+        {
+            return NotFound();
+        }
+
         return travel;
     }
 

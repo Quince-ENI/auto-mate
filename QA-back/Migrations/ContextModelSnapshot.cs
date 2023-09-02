@@ -56,7 +56,7 @@ namespace QA_back.Migrations
 
                     b.HasKey("idCar");
 
-                    b.ToTable("Car");
+                    b.ToTable("car");
                 });
 
             modelBuilder.Entity("QA_back.Models.Key", b =>
@@ -73,7 +73,7 @@ namespace QA_back.Migrations
 
                     b.HasKey("idKey");
 
-                    b.ToTable("Key");
+                    b.ToTable("key");
                 });
 
             modelBuilder.Entity("QA_back.Models.Site", b =>
@@ -99,7 +99,7 @@ namespace QA_back.Migrations
 
                     b.HasKey("idSite");
 
-                    b.ToTable("Site");
+                    b.ToTable("site");
                 });
 
             modelBuilder.Entity("QA_back.Models.Travel", b =>
@@ -114,9 +114,6 @@ namespace QA_back.Migrations
                     b.Property<DateTime>("arrival_time")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("car")
-                        .HasColumnType("int");
-
                     b.Property<int>("carpooling")
                         .HasColumnType("int");
 
@@ -126,7 +123,13 @@ namespace QA_back.Migrations
                     b.Property<DateTime>("departure_time")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("idCar")
+                        .HasColumnType("int");
+
                     b.Property<int>("remaining_seats")
+                        .HasColumnType("int");
+
+                    b.Property<int>("travel")
                         .HasColumnType("int");
 
                     b.Property<int>("user")
@@ -134,7 +137,9 @@ namespace QA_back.Migrations
 
                     b.HasKey("idRoute");
 
-                    b.ToTable("Travel");
+                    b.HasIndex("travel");
+
+                    b.ToTable("travel");
                 });
 
             modelBuilder.Entity("QA_back.Models.User", b =>
@@ -163,7 +168,23 @@ namespace QA_back.Migrations
 
                     b.HasKey("registration_number");
 
-                    b.ToTable("User");
+                    b.ToTable("user");
+                });
+
+            modelBuilder.Entity("QA_back.Models.Travel", b =>
+                {
+                    b.HasOne("QA_back.Models.Car", "Car")
+                        .WithMany("Travels")
+                        .HasForeignKey("travel")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Car");
+                });
+
+            modelBuilder.Entity("QA_back.Models.Car", b =>
+                {
+                    b.Navigation("Travels");
                 });
 #pragma warning restore 612, 618
         }
