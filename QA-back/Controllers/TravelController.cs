@@ -22,7 +22,7 @@ public class TravelController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<Travel>> GetTravels()
     {
-        return _context.Travel.ToList();
+        return _context.Travel.Include(t => t.Car).ToList();
     }
 
     // GET: Travel/5

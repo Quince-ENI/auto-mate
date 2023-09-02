@@ -15,10 +15,8 @@ public class Car
     public string? Couleur { get; set; }
     [Column("Nombre de Portes")]
     public int Nb_Portes { get; set; }
-    public int Disponibilité  { get; set; }
+    public int Disponibilité { get; set; }
     [Column("Nombre de Km")]
     public int Nb_Km { get; set; }
     public int key { get; set; }
-    [ForeignKey("travel")]
-    public ICollection<Travel> Travels { get; set; }
 }
