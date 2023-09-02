@@ -38,34 +38,6 @@ INSERT INTO `key` (`idKey`, `location`, `available`) VALUES
 	(15, 'Bordeaux', 1);
 /*!40000 ALTER TABLE `key` ENABLE KEYS */;
 
--- Listage de la structure de la table automatebdd. car
-DROP TABLE IF EXISTS `car`;
-CREATE TABLE IF NOT EXISTS `car` (
-  `idCar` int(11) NOT NULL AUTO_INCREMENT,
-  `Immatriculation` varchar(7) NOT NULL,
-  `Type` varchar(50) DEFAULT NULL,
-  `Marque` varchar(50) DEFAULT NULL,
-  `Modele` varchar(50) DEFAULT NULL,
-  `Couleur` varchar(50) DEFAULT NULL,
-  `Nombre de Portes` int(11) NOT NULL DEFAULT 0,
-  `Disponibilité` tinyint(4) NOT NULL DEFAULT 0,
-  `Nombre de Km` int(11) NOT NULL DEFAULT 0,
-  `key` int(11) DEFAULT NULL,
-  PRIMARY KEY (`idCar`),
-  KEY `FK_car_key` (`key`),
-  CONSTRAINT `FK_car_key` FOREIGN KEY (`key`) REFERENCES `key` (`idKey`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- Listage des données de la table automatebdd.car : ~5 rows (environ)
-DELETE FROM `car`;
-/*!40000 ALTER TABLE `car` DISABLE KEYS */;
-INSERT INTO `car` (`idCar`, `Immatriculation`, `Type`, `Marque`, `Modele`, `Couleur`, `Nombre de Portes`, `Disponibilité`, `Nombre de Km`, `key`) VALUES
-	(16, 'ABC123', 'Berline', 'Renault', 'Clio', 'Rouge', 5, 1, 10000, 11),
-	(17, 'DEF456', 'SUV', 'Peugeot', '3008', 'Blanc', 5, 0, 5000, 12),
-	(18, 'GHI789', 'Berline', 'Citroen', 'C4', 'Bleu', 5, 1, 8000, 13),
-	(19, 'JKL012', 'Citadine', 'Toyota', 'Yaris', 'Vert', 3, 1, 7000, 14),
-	(20, 'MNO345', 'SUV', 'Nissan', 'Qashqai', 'Gris', 5, 1, 6000, 15);
-/*!40000 ALTER TABLE `car` ENABLE KEYS */;
 
 -- Listage de la structure de la table automatebdd. user
 DROP TABLE IF EXISTS `user`;
@@ -84,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 INSERT INTO `user` (`registration_number`, `name`, `first_name`, `mail`, `tel`, `password`, `role`) VALUES
-	(11, 'Dubois', 'Pierre', 'pierre.dubois@mail.com', '1234567890', 'password', 'responsable'),
+	(11, 'Cathelinais', 'Corentin', 'co.cathelinais@gmail.com', '1234567890', 'password', 'responsable'),
 	(12, 'Leroy', 'Marie', 'marie.leroy@mail.com', '9876543210', 'password', 'user'),
 	(13, 'Moreau', 'Jean', 'jean.moreau@mail.com', '2345678901', 'password', 'user'),
 	(14, 'Roy', 'Julie', 'julie.roy@mail.com', '3456789012', 'pass123', 'responsable'),
@@ -124,6 +96,39 @@ INSERT INTO `site` (`idSite`, `name`, `address`, `city`, `departement`, `postal_
 	(4, 'Site D', '101 Rue du Site D', 'Toulouse', 31, 31000, 14),
 	(5, 'Site E', '202 Rue du Site E', 'Bordeaux', 33, 33000, 21);
 /*!40000 ALTER TABLE `site` ENABLE KEYS */;
+
+-- Listage de la structure de la table automatebdd. car
+DROP TABLE IF EXISTS `car`;
+CREATE TABLE IF NOT EXISTS `car` (
+  `idCar` int(11) NOT NULL AUTO_INCREMENT,
+  `Immatriculation` varchar(7) NOT NULL,
+  `Type` varchar(50) DEFAULT NULL,
+  `Marque` varchar(50) DEFAULT NULL,
+  `Modele` varchar(50) DEFAULT NULL,
+  `Couleur` varchar(50) DEFAULT NULL,
+  `Nombre de Portes` int(11) NOT NULL DEFAULT 0,
+  `Disponibilité` tinyint(4) NOT NULL DEFAULT 0,
+  `Nombre de Km` int(11) NOT NULL DEFAULT 0,
+  `idSite` int(50) DEFAULT NULL, 
+  `key` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idCar`),
+  KEY `FK_car_key` (`key`),
+  KEY `FK_car_site` (`idSite`),
+  CONSTRAINT `FK_car_key` FOREIGN KEY (`key`) REFERENCES `key` (`idKey`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `FK_car_site` FOREIGN KEY (`idSite`) REFERENCES `site` (`idSite`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Listage des données de la table automatebdd.car : ~5 rows (environ)
+DELETE FROM `car`;
+/*!40000 ALTER TABLE `car` DISABLE KEYS */;
+INSERT INTO `car` (`idCar`, `Immatriculation`, `Type`, `Marque`, `Modele`, `Couleur`, `Nombre de Portes`, `Disponibilité`, `Nombre de Km`, `key`, `idSite`) VALUES
+	(16, 'ABC123', 'Berline', 'Renault', 'Clio', 'Rouge', 5, 1, 10000, 11, 1),
+	(17, 'DEF456', 'SUV', 'Peugeot', '3008', 'Blanc', 5, 0, 5000, 12, 2),
+	(18, 'GHI789', 'Berline', 'Citroen', 'C4', 'Bleu', 5, 1, 8000, 13, 3),
+	(19, 'JKL012', 'Citadine', 'Toyota', 'Yaris', 'Vert', 3, 1, 7000, 14, 4),
+	(20, 'MNO345', 'SUV', 'Nissan', 'Qashqai', 'Gris', 5, 1, 6000, 15, 5);
+/*!40000 ALTER TABLE `car` ENABLE KEYS */;
+
 
 -- Listage de la structure de la table automatebdd. travel
 DROP TABLE IF EXISTS `travel`;

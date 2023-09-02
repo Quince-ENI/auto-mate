@@ -12,9 +12,10 @@ export const selectFilterRoutes = createSelector(
   selectSitesFilter,
   selectDatesFilter,
   (routes, site, dates) =>
-    routes.filter(route => site === route.departureCity && dates && dates[0]?.isSame(route.departureDate, 'day'))
+    routes.filter(route => site === route.departure_city && dates && dates[0]?.isSame(route.departure_time, 'day'))
 );
 
-export const selectFilterRoutesFree = createSelector(selectFilterRoutes, selectSites, (filteredRoutes, sites) =>
-  filteredRoutes.filter(route => sites.includes(route.departureCity) && route.remainingPlaces !== 0)
-);
+export const selectFilterRoutesFree = createSelector(selectFilterRoutes, selectSites, (filteredRoutes, sites) => {
+  const sitesCity = sites.map(site => site.city);
+  return filteredRoutes.filter(route => sitesCity.includes(route.departure_city) && route.remaining_seats !== 0);
+});

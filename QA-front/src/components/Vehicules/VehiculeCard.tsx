@@ -67,7 +67,7 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ car }) => {
             <strong>Couleur:</strong> {car.couleur}
           </p>
           <p>
-            <strong>Nombre de portes:</strong> {car.nbDoors}
+            <strong>Nombre de portes:</strong> {car.nb_Portes}
           </p>
           <p>
             <strong>Disponibilité:</strong> {car.disponibility ? 'Disponible' : 'Non disponible'}
@@ -76,7 +76,7 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ car }) => {
             <strong>Kilomètres:</strong> {car.kilometers} km
           </p>
           <p>
-            <strong>Site:</strong> {car.site}
+            <strong>Site:</strong> {car.site.city}
           </p>
         </div>
       </CSSTransition>

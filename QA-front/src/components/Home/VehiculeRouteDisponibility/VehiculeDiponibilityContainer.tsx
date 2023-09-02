@@ -25,7 +25,7 @@ const StyledContainer = styled.div`
 const VehiculeDisponibilityContainer: FC = () => {
   const dispatch = useAutoMateDispatch();
   const sites = useSelector(selectSites);
-  const siteOptions = sites.map(site => ({ label: site, value: site }));
+  const siteOptions = sites.map(site => ({ label: site.city, value: site.city }));
   const filteredRoutes = useSelector(selectFilterRoutesFree);
   const filteredCars = useSelector(selectFilteredCars);
   const dates = useSelector(selectDatesFilter);
@@ -58,10 +58,10 @@ const VehiculeDisponibilityContainer: FC = () => {
             {filteredRoutes &&
               filteredRoutes.map(route => (
                 <RouteCard
-                  arrivalCity={route.arrivalCity}
-                  departureCity={route.departureCity}
-                  departure_time={route.departureTime}
-                  remainingPlaces={route.remainingPlaces}
+                  arrivalCity={route.arrival_city}
+                  departureCity={route.departure_city}
+                  departure_time={route.departureHour}
+                  remainingPlaces={route.remaining_seats}
                 />
               ))}
           </Card>
