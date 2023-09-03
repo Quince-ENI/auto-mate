@@ -18,6 +18,8 @@ const StyledFooter = styled(Footer)`
   color: white;
 `;
 
+export const StyledBackgroundDiv = styled.div``;
+
 function useRedirectIfNotLogged(): void {
   const isUserLogged = useSelector(selectIsUserLogged);
   const navigate = useNavigate();

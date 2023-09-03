@@ -1,10 +1,11 @@
 import { FC } from 'react';
+import { StyledContainer } from '../Home/VehiculeRouteDisponibility/VehiculeDiponibilityContainer';
 import RequestTableContainer from './RequestTableContainer';
 
 const Request: FC = () => (
-  <div>
+  <StyledContainer>
     <RequestTableContainer />
-  </div>
+  </StyledContainer>
 );
 
 export default Request;

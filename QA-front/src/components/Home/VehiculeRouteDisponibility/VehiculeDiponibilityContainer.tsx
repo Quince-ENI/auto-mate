@@ -3,6 +3,7 @@ import { Card, Col, Row } from 'antd';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { styled } from 'styled-components';
+import imgBackground from '../../../assets/imgBackground.svg';
 import { RangeValue } from '../../../state/interfaces';
 import { selectFilteredCars } from '../../../state/selector/cars.selector';
 import { selectDatesFilter } from '../../../state/selector/common.selector';
@@ -18,8 +19,11 @@ const StyledRow = styled(Row)`
   display: flex;
   justify-content: space-between;
 `;
-const StyledContainer = styled.div`
+export const StyledContainer = styled.div`
   padding: 20px;
+  height: 90vh;
+  background: url(${imgBackground}) no-repeat;
+  background-position: bottom right;
 `;
 
 const VehiculeDisponibilityContainer: FC = () => {
