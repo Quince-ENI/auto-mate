@@ -17,9 +17,18 @@ export const INITIAL_STATE: AutoMateState = {
     user: {
       name: 'defaultName',
       picture: 'defaultpicture',
-      email: 'defaultMail',
-      role: 'user'
+      mail: 'defaultMail',
+      role: 'user',
+      site: {
+        idSite: 0,
+        name: '',
+        address: '',
+        city: '',
+        departement: 0,
+        postal_code: 0
+      }
     },
-    cars: []
+    cars: [],
+    userRoutes: []
   }
 };

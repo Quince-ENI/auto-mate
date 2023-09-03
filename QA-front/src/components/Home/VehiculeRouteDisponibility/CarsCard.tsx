@@ -2,18 +2,17 @@ import { Button, Card } from 'antd';
 import { Dayjs } from 'dayjs';
 import { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { Car } from '../../../state/interfaces';
 import { selectSitesFilter } from '../../../state/selector/common.selector';
 import CarModal from './CarModal';
 
 export interface CarCardProps {
-  name: string;
-  marque: string;
-  immatriculation: string;
+  car: Car;
   departureDate?: Dayjs | null;
   returnDate?: Dayjs | null;
 }
 
-const CarsCard: FC<CarCardProps> = ({ name, marque, immatriculation, departureDate, returnDate }) => {
+const CarsCard: FC<CarCardProps> = ({ car, departureDate, returnDate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = (): void => {
@@ -23,17 +22,15 @@ const CarsCard: FC<CarCardProps> = ({ name, marque, immatriculation, departureDa
 
   return (
     <Card>
-      <p>{name}</p>
-      <p>{marque}</p>
+      <p>{car.marque}</p>
+      <p>{car.modele}</p>
       <Button type="primary" onClick={showModal}>
         Réserver
       </Button>
       <CarModal
         isModalOpen={isModalOpen}
+        car={car}
         setIsModalOpen={setIsModalOpen}
-        carName={name}
-        carMarque={marque}
-        immatriculation={immatriculation}
         departureDate={departureDate}
         returnDate={returnDate}
         departureCity={departureCity}

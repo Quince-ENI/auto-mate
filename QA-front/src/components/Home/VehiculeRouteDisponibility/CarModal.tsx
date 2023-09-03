@@ -2,13 +2,12 @@ import { Checkbox, Form, FormInstance, Input, Modal, TimePicker } from 'antd';
 import { Dayjs } from 'dayjs';
 import { FC, useCallback } from 'react';
 import { createRouteAsync } from '../../../state/actions/routes.actions';
+import { Car } from '../../../state/interfaces';
 import { useAutoMateDispatch } from '../../../state/store';
 
 interface CarModalProps {
   isModalOpen: boolean;
-  carName: string;
-  carMarque: string;
-  immatriculation: string;
+  car: Car;
   departureDate?: Dayjs | null;
   departureCity: string;
   returnDate?: Dayjs | null;
@@ -28,7 +27,7 @@ interface UseCarForm {
 }
 
 function useCarForm(
-  immatriculation: string,
+  car: Car,
   departureCity: string,
   departureDate?: Dayjs | null,
   returnDate?: Dayjs | null
@@ -40,32 +39,29 @@ function useCarForm(
       dispatch(
         createRouteAsync({
           route: {
-            departureCity: departureCity,
-            arrivalCity: values.destination,
-            departureTime: values.departureTime.format('HH:mm').toString(),
-            departureDate: departureDate ? departureDate.toDate() : new Date()
-            // arrivalTime: returnDate ? returnDate.toDate() : new Date()
-            // car: immatriculation
+            departure_city: departureCity,
+            arrival_city: values.destination,
+            departure_time: departureDate ? departureDate.toDate() : new Date(),
+            arrival_time: returnDate ? returnDate.toDate() : new Date(),
+            car: car
           }
         })
       );
     },
-    [departureCity, departureDate, dispatch]
+    [car, departureCity, departureDate, dispatch, returnDate]
   );
   return { form, handleSubmitForm };
 }
 
 const CarModal: FC<CarModalProps> = ({
   isModalOpen,
-  carName,
-  carMarque,
-  immatriculation,
+  car,
   departureDate,
   returnDate,
   departureCity,
   setIsModalOpen
 }) => {
-  const { form, handleSubmitForm } = useCarForm(immatriculation, departureCity, departureDate, returnDate);
+  const { form, handleSubmitForm } = useCarForm(car, departureCity, departureDate, returnDate);
   const handleOk = (): void => {
     form.submit();
     setIsModalOpen(false);
@@ -76,8 +72,8 @@ const CarModal: FC<CarModalProps> = ({
   };
   return (
     <Modal title="Reservation d'un véhicule" open={isModalOpen} onCancel={handleCancel} onOk={handleOk}>
-      <p>Marque : {carMarque}</p>
-      <p>Modèle de véhicule : {carName}</p>
+      <p>Marque : {car.marque}</p>
+      <p>Modèle de véhicule : {car.modele}</p>
       <p>Début de la réservation :{departureDate && departureDate.format('DD/MM/YYYY')}</p>
       <p>Date de retour: {returnDate && returnDate.format('DD/MM/YYYY')}</p>
       <Form form={form} colon={true} labelAlign="left" onFinish={handleSubmitForm}>

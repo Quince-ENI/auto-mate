@@ -8,8 +8,9 @@ export type User = {
   userId?: string;
   name: string;
   picture: string;
-  email: string;
+  mail: string;
   role: Role;
+  site: Site;
 };
 
 export type Site = {
@@ -17,8 +18,8 @@ export type Site = {
   name: string;
   address: string;
   city: string;
-  departement: 75;
-  postal_code: 75000;
+  departement: number;
+  postal_code: number;
 };
 
 interface AutoMateUiFilterState {
@@ -38,6 +39,7 @@ interface AutoMateEntitiesState {
   user: User;
   routes: Route[];
   sites: Site[];
+  userRoutes: Route[];
 }
 
 export interface AutoMateState {

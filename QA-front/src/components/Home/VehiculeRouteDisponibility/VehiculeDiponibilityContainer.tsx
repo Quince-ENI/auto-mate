@@ -53,9 +53,7 @@ const VehiculeDisponibilityContainer: FC = () => {
               filteredCars.map(car => (
                 <CarsCard
                   key={car.immatriculation}
-                  name={car.modele}
-                  marque={car.marque}
-                  immatriculation={car.immatriculation}
+                  car={car}
                   departureDate={dates && dates[0]}
                   returnDate={dates && dates[1]}
                 />

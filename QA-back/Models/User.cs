@@ -14,4 +14,7 @@ public class User
     public string? tel { get; set; }
     public string? password { get; set; }
     public string? role { get; set; }
+    public int idSite { get; set; }
+    [ForeignKey("idSite")]
+    public Site Site { get; set; }
 }
