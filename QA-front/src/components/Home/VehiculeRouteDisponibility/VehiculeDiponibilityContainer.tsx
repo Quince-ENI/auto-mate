@@ -50,7 +50,14 @@ const VehiculeDisponibilityContainer: FC = () => {
         <Col span={11}>
           <Card title="Voitures" bordered={false}>
             {filteredCars &&
-              filteredCars.map(car => <CarsCard key={car.immatriculation} name={car.modele} marque={car.marque} />)}
+              filteredCars.map(car => (
+                <CarsCard
+                  key={car.immatriculation}
+                  car={car}
+                  departureDate={dates && dates[0]}
+                  returnDate={dates && dates[1]}
+                />
+              ))}
           </Card>
         </Col>
         <Col span={11}>

@@ -118,8 +118,10 @@ public class TravelController : ControllerBase
 
     // POST: Travel
     [HttpPost]
-    public ActionResult<Travel> CreateTravel(Travel travel)
+    public ActionResult<Travel> CreateTravel(Travel travel, int carId)
     {
+        var car = _context.Car.Find(carId);
+        travel.Car = car;
         _context.Travel.Add(travel);
         _context.SaveChanges();
 

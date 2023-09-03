@@ -13,3 +13,19 @@ export function onGetRoutesAsyncFulfilled(state: AutoMateState, { payload: route
   state.entities.routes = routes;
   state.ui.routesLoading = false;
 }
+
+export function onCreateRouteAsyncPending(state: AutoMateState): void {
+  state.ui.routesLoading = true;
+}
+
+export function onCreateRouteAsyncRejected(state: AutoMateState): void {
+  state.ui.routesLoading = true;
+}
+
+export function onCreateRouteAsyncFulfilled(
+  state: AutoMateState,
+  { payload: routesResponse }: FulfilledAction<Route>
+): void {
+  state.entities.routes = [...state.entities.routes, routesResponse];
+  state.ui.routesLoading = false;
+}

@@ -19,8 +19,8 @@ const columns = [
   },
   {
     title: 'Destination',
-    dataIndex: 'arrivalCity',
-    key: 'arrivalCity'
+    dataIndex: 'arrival_city',
+    key: 'arrival_city'
   },
   {
     title: 'Site de départ',
@@ -29,8 +29,8 @@ const columns = [
   },
   {
     title: 'Places restantes',
-    dataIndex: 'remainingPlaces',
-    key: 'remainingPlaces'
+    dataIndex: 'remaining_seats',
+    key: 'remaining_seats'
   },
   {
     title: 'Statut',

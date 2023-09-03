@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QA_back.Models;
+using System.Diagnostics;
 using System.Linq;
+
 
 namespace QA_back.Controllers;
 
@@ -20,7 +23,7 @@ public class UserController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<User>> GetUsers()
     {
-        return _context.User.ToList();
+        return _context.User.Include(u => u.Site).ToList();
     }
 
     // GET: User/5
@@ -39,7 +42,7 @@ public class UserController : ControllerBase
     [HttpGet("byEmail")]
     public ActionResult<User> GetUserbyEmail(string mail)
     {
-        var user = _context.User.SingleOrDefault(u => u.mail == mail);
+        var user = _context.User.Include(u => u.Site).SingleOrDefault(u => u.mail == mail);
         if (user == null)
         {
             return NotFound();

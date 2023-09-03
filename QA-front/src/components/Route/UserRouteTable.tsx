@@ -14,23 +14,23 @@ const columns = [
   },
   {
     title: 'Ville de départ',
-    dataIndex: 'departureCity',
-    key: 'departureCity'
+    dataIndex: 'departure_city',
+    key: 'departure_city'
   },
   {
     title: "Ville d'arrivée",
-    dataIndex: 'arrivalCity',
-    key: 'arrivalCity'
+    dataIndex: 'arrival_city',
+    key: 'arrival_city'
   },
   {
     title: 'Places restantes',
-    dataIndex: 'remainingPlaces',
-    key: 'remainingPlaces'
+    dataIndex: 'remaining_seats',
+    key: 'remaining_seats'
   },
   {
     title: 'Heure de départ',
-    dataIndex: 'departure_time',
-    key: 'departure_time'
+    dataIndex: 'departure_hour',
+    key: 'departure_hour'
   }
 ];
 
