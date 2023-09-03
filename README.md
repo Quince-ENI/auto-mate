@@ -31,7 +31,7 @@ Avant de procéder au déploiement de l'application, assurez-vous d'avoir instal
    Pour déployer l'application, utilisez la commande suivante dans le répertoire racine de votre projet :
 
    ```bash
-   docker-compose up --build
+   docker-compose up -f ./docker-compose.yml --build (a faire à la racine du projet)
    ```
 
    Cette commande va construire et lancer les conteneurs Docker nécessaires pour exécuter votre application.
@@ -60,5 +60,8 @@ C'est tout ! Votre application devrait maintenant être déployée avec succès 
 ```
 
 ```
+
+Déploiement en Production
+Pour déployer l'application en production, veuillez suivre les fichiers de configuration contenues dans le répertoire "prod" de ce repository. Les fichiers et les étapes spécifiques à la production se trouvent dans ce répertoire. Assurez-vous de suivre scrupuleusement les indications pour garantir un déploiement stable et sécurisé de votre application en production.
 
 
