@@ -1,0 +1,70 @@
+# traefik.yml
+api:
+  dashboard: true # Active le tableau de bord de Traefik (optionnel)
+
+entryPoints:
+  web:
+    address: ":80"
+  web-secure:
+    address: ":443"
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock" # Configuration pour Docker
+    exposedByDefault: false
+
+http:
+  certificatesResolvers:
+    myresolver:
+      acme:
+        email: "jean.delonca@gmail.com" 
+        storage: "/certificat" # Emplacement pour stocker les certificats
+        httpChallenge:
+          entryPoint: web
+
+  routers:
+    traefik-router:
+      rule: "Host(`traefik.localhost`)"
+      entryPoints:
+        - web
+      service: api@internal
+
+    whoami-router:
+      rule: "Host(`whoami.localhost`)"
+      entryPoints:
+        - web
+      service: whoami-service
+
+    front-router:
+      rule: "Host(`domaine-automate.com`)"
+      entryPoints:
+        - web
+        - web-secure
+      service: front-service
+      tls:
+        certResolver: myresolver
+
+    back-router:
+      rule: "Host(`domaine-automate.com`)"
+      entryPoints:
+        - web
+        - web-secure
+      service: back-service
+      tls:
+        certResolver: myresolver
+
+  services:
+    whoami-service:
+      loadBalancer:
+        servers:
+          - url: "http://simple-service:80"
+
+    front-service:
+      loadBalancer:
+        servers:
+          - url: "http://front:3000"
+
+    back-service:
+      loadBalancer:
+        servers:
+          - url: "http://back:80"

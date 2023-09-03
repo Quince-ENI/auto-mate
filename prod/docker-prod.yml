@@ -1,0 +1,74 @@
+services:
+  traefik:
+    image: "traefik:latest"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  whoami:
+    image: "traefik/whoami"
+    container_name: "simple-service"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+
+  front:
+    container_name: front
+    build:
+      context: ../QA-front
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    environment:
+      - BACKEND_URL= http://back
+#    volumes:
+#      - ./certificates:/certificates:ro
+    depends_on:
+      - back 
+    networks:
+      - my-network
+  back:
+    container_name: back
+    build:
+      context: ../QA-back
+      dockerfile: Dockerfile
+    environment:
+      - ConnectionStrings:DefaultConnection=server=automatebdd;port=3306;database=automatebdd;user=automate;password=cY4xLFsxbj3frQCKDogqkMBDGLEb47f6mf8biaYN;
+    ports:
+      - 5000:80
+    depends_on:
+      - db
+    networks:
+      - my-network
+  db:
+    container_name: automatebdd
+    image: mariadb:11
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
+    volumes:
+      - ../BDD/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - db_data:/var/lib/mysql
+    networks:
+      - my-network
+
+volumes:
+  db_data:
+
+networks:
+  my-network:
+    driver: bridge
