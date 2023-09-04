@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode';
 import { ReactElement, useEffect, useRef } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -11,6 +12,7 @@ import Vehicules from './components/Vehicules/Vehicules';
 import { getCarsAsync } from './state/actions/cars.actions';
 import { getRoutesAsync } from './state/actions/routes.actions';
 import { getSitesAsync } from './state/actions/sites.actions';
+import { getConnectedUserAsync } from './state/actions/user.actions';
 import { actions, useAutoMateDispatch } from './state/store';
 
 function App(): ReactElement {
@@ -23,6 +25,12 @@ function App(): ReactElement {
       dispatch(getRoutesAsync());
       dispatch(getSitesAsync());
       isInitialized.current = true;
+    }
+    if (jwtToken) {
+      const decodeJwt: { email: string } = jwtDecode(jwtToken);
+      const userMail = decodeJwt.email;
+      dispatch(actions.setIsUserLogged(jwtToken));
+      dispatch(getConnectedUserAsync(userMail));
     }
     dispatch(actions.setIsUserLogged(jwtToken));
   }, [dispatch, isInitialized, jwtToken]);

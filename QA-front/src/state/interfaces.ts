@@ -5,7 +5,7 @@ export type RangeValue = [Dayjs | null, Dayjs | null] | undefined;
 export type Status = 'validated' | 'pending' | 'ended';
 
 export type User = {
-  userId?: string;
+  registration_number?: string;
   name: string;
   picture: string;
   mail: string;
@@ -48,6 +48,7 @@ export interface AutoMateState {
 }
 
 export interface Car {
+  idCar: string;
   immatriculation: string;
   marque: string;
   modele: string;
@@ -67,5 +68,6 @@ export interface Route {
   departureHour: string;
   departure_time: Date;
   arrival_time: Date;
+  idCar: string;
   car: Car;
 }

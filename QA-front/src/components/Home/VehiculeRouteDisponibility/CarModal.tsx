@@ -1,8 +1,10 @@
 import { Checkbox, Form, FormInstance, Input, Modal, TimePicker } from 'antd';
 import { Dayjs } from 'dayjs';
 import { FC, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { createRouteAsync } from '../../../state/actions/routes.actions';
 import { Car } from '../../../state/interfaces';
+import { selectUser } from '../../../state/selector/user.selector';
 import { useAutoMateDispatch } from '../../../state/store';
 
 interface CarModalProps {
@@ -34,21 +36,26 @@ function useCarForm(
 ): UseCarForm {
   const dispatch = useAutoMateDispatch();
   const [form] = Form.useForm();
+  const user = useSelector(selectUser);
   const handleSubmitForm = useCallback(
     (values: UseCarFormValues): void => {
       dispatch(
         createRouteAsync({
           route: {
+            user: user.registration_number,
             departure_city: departureCity,
             arrival_city: values.destination,
             departure_time: departureDate ? departureDate.toDate() : new Date(),
             arrival_time: returnDate ? returnDate.toDate() : new Date(),
+            remaining_seats: car.nb_Portes,
+            status: 'pending',
+            idCar: car.idCar,
             car: car
           }
         })
       );
     },
-    [car, departureCity, departureDate, dispatch, returnDate]
+    [car, departureCity, departureDate, dispatch, returnDate, user.registration_number]
   );
   return { form, handleSubmitForm };
 }

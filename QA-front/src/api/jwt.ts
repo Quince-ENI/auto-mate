@@ -7,3 +7,7 @@ export function getToken(): string | null {
 export function storeToken(jwtToken: string): void {
   localStorage.setItem(LOCAL_STORAGE_KEY, jwtToken);
 }
+
+export function removeToken(): void {
+  localStorage.removeItem(LOCAL_STORAGE_KEY);
+}
