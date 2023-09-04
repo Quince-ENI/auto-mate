@@ -43,7 +43,11 @@ services:
       context: ../QA-back
       dockerfile: Dockerfile
     environment:
-      - ConnectionStrings:DefaultConnection=server=automatebdd;port=3306;database=automatebdd;user=automate;password=cY4xLFsxbj3frQCKDogqkMBDGLEb47f6mf8biaYN;
+      - ConnectionStrings:DefaultConnection=server=$MYSQL_DATABASE;port=3306;database=automatebdd;user=$MYSQL_USER;password=$MYSQL_PASSWORD;
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQL_DATABASE
+      - MYSQL_USER=$MYSQL_USER
+      - MYSQL_PASSWORD=$MYSQL_PASSWORD
     ports:
       - 5000:80
     depends_on:
