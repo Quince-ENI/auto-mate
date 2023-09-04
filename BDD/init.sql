@@ -73,7 +73,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `first_name` varchar(50) NOT NULL DEFAULT '0',
   `mail` varchar(100) NOT NULL DEFAULT '0',
   `tel` varchar(10) DEFAULT NULL,
-  `password` varchar(50) DEFAULT NULL,
   `role` enum('user','responsable') NOT NULL DEFAULT 'user',
   `idSite` int(11) NOT NULL,
   PRIMARY KEY (`registration_number`) USING BTREE,
@@ -84,18 +83,18 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Listage des données de la table automatebdd.user : ~11 rows (environ)
 DELETE FROM `user`;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`registration_number`, `name`, `first_name`, `mail`, `tel`, `password`, `role`, `idSite`) VALUES
-	(11, 'Cathelinais', 'Corentin', 'co.cathelinais@gmail.com', '1234567890', 'password', 'responsable', 1),
-	(12, 'Leroy', 'Marie', 'marie.leroy@mail.com', '9876543210', 'password', 'user', 1),
-	(13, 'Moreau', 'Jean', 'jean.moreau@mail.com', '2345678901', 'password', 'user', 1),
-	(14, 'Roy', 'Julie', 'julie.roy@mail.com', '3456789012', 'pass123', 'responsable', 2),
-	(15, 'Lavoie', 'David', 'david.lavoie@mail.com', '4567890123', 'pass123', 'user', 2),
-	(16, 'Gauthier', 'Sophie', 'sophie.gauthier@mail.com', '5678901234', 'pass123', 'user', 2),
-	(17, 'Martinez', 'Alexandre', 'alexandre.martinez@mail.com', '6789012345', 'pass123', 'responsable', 1),
-	(18, 'Tremblay', 'Émilie', 'emilie.tremblay@mail.com', '7890123456', 'pass123', 'user', 1),
-	(19, 'Smith', 'Michael', 'michael.smith@mail.com', '8901234567', 'pass123', 'responsable', 1),
-	(20, 'Johnson', 'Jessica', 'jessica.johnson@mail.com', '9012345678', 'pass123', 'user', 2),
-	(21, 'Chen', 'David', 'david.chen@mail.com', '0123456789', 'pass123', 'responsable', 2);
+INSERT INTO `user` (`registration_number`, `name`, `first_name`, `mail`, `tel`, `role`, `idSite`) VALUES
+	(11, 'Cathelinais', 'Corentin', 'co.cathelinais@gmail.com', '1234567890', 'responsable', 1),
+	(12, 'Paugam', 'Pierre-Louis', 'paugam.pl@gmail.com', '9876543210', 'responsable', 1),
+	(13, 'Moreau', 'Jean', 'jean.moreau@mail.com', '2345678901', 'user', 1),
+	(14, 'Roy', 'Julie', 'julie.roy@mail.com', '3456789012', 'responsable', 2),
+	(15, 'Lavoie', 'David', 'david.lavoie@mail.com', '4567890123', 'user', 2),
+	(16, 'Gauthier', 'Sophie', 'sophie.gauthier@mail.com', '5678901234', 'user', 2),
+	(17, 'Martinez', 'Alexandre', 'alexandre.martinez@mail.com', '6789012345', 'responsable', 1),
+	(18, 'Tremblay', 'Émilie', 'emilie.tremblay@mail.com', '7890123456', 'user', 1),
+	(19, 'Smith', 'Michael', 'michael.smith@mail.com', '8901234567', 'responsable', 1),
+	(20, 'Johnson', 'Jessica', 'jessica.johnson@mail.com', '9012345678', 'user', 2),
+	(21, 'Chen', 'David', 'david.chen@mail.com', '0123456789', 'responsable', 2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 -- Listage de la structure de la table automatebdd. car
