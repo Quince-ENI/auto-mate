@@ -1,8 +1,31 @@
 services:
+  traefik:
+    image: "traefik:latest"
+    container_name: "traefik"
+    command:
+      #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  whoami:
+    image: "traefik/whoami"
+    container_name: "simple-service"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.localhost`)"
+      - "traefik.http.routers.whoami.entrypoints=web"
+
   front:
     container_name: front
     build:
-      context: ./QA-front
+      context: ../QA-front
       dockerfile: Dockerfile
     ports:
       - 3000:3000
@@ -17,7 +40,7 @@ services:
   back:
     container_name: back
     build:
-      context: ./QA-back
+      context: ../QA-back
       dockerfile: Dockerfile
     environment:
       - ConnectionStrings:DefaultConnection=server=$MYSQL_DATABASE;port=3306;database=automatebdd;user=$MYSQL_USER;password=$MYSQL_PASSWORD;
@@ -42,7 +65,7 @@ services:
       - MYSQL_USER=$MYSQL_USER
       - MYSQL_PASSWORD=$MYSQL_PASSWORD
     volumes:
-      - ./BDD/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ../BDD/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
       - db_data:/var/lib/mysql
     networks:
       - my-network
