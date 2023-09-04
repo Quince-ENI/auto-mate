@@ -2,7 +2,7 @@ import { AutoMateState, RangeValue } from '../interfaces';
 
 export function selectAreFiltersEmpty(state: AutoMateState): boolean {
   if (state.ui.filter.dates === undefined) return true;
-  return state.ui.filter.site === '' && state.ui.filter.dates[0] === null && state.ui.filter.dates[1] === null;
+  return state.ui.filter.site === '' || state.ui.filter.dates.includes(null);
 }
 
 export function selectSitesFilter(state: AutoMateState): string {

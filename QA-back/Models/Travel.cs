@@ -10,6 +10,7 @@ public class Travel
     public int idRoute { get; set; }
     public string? departure_city { get; set; }
     public string? arrival_city { get; set; }
+    public string? status { get; set; }
     public DateTime departure_time { get; set; }
     public DateTime arrival_time { get; set; }
     public int remaining_seats { get; set; }

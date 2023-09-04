@@ -125,7 +125,9 @@ public class TravelController : ControllerBase
         _context.Travel.Add(travel);
         _context.SaveChanges();
 
-        return CreatedAtAction(nameof(GetTravel), new { id = travel.idRoute }, travel);
+        var loadedTravel = _context.Travel.Include(t => t.Car).ThenInclude(c => c.Site).Single(t => t.idRoute == travel.idRoute);
+
+        return CreatedAtAction(nameof(GetTravel), new { id = loadedTravel.idRoute }, loadedTravel);
     }
 
     // DELETE: Travel/5

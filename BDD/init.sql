@@ -144,6 +144,7 @@ CREATE TABLE IF NOT EXISTS `travel` (
   `carpooling` tinyint(4) NOT NULL DEFAULT 0,
   `user` int(11) DEFAULT NULL,
   `idCar` int(11) DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idRoute`) USING BTREE,
   KEY `FK_route_user` (`user`),
   KEY `FK_route_car` (`idCar`),
@@ -154,12 +155,12 @@ CREATE TABLE IF NOT EXISTS `travel` (
 -- Listage des données de la table automatebdd.travel : ~5 rows (environ)
 DELETE FROM `travel`;
 /*!40000 ALTER TABLE `travel` DISABLE KEYS */;
-INSERT INTO `travel` (`idRoute`, `departure_city`, `arrival_city`, `departure_time`, `arrival_time`, `remaining_seats`, `carpooling`, `user`, `idCar`) VALUES
-	(1, 'Paris', 'Lyon', '2023-07-02 10:00:00', '2023-07-02 14:00:00', 2, 1, 11, 16),
-	(2, 'Lyon', 'Paris', '2023-07-02 16:00:00', '2023-07-02 20:00:00', 4, 0, 12, 17),
-	(3, 'Paris', 'Marseille', '2023-07-03 09:00:00', '2023-07-03 15:00:00', 3, 1, 13, 18),
-	(4, 'Toulouse', 'Bordeaux', '2023-07-04 08:00:00', '2023-07-04 12:00:00', 1, 0, 14, 19),
-	(5, 'Marseille', 'Nice', '2023-07-05 10:00:00', '2023-07-05 15:00:00', 5, 1, 15, 20);
+INSERT INTO `travel` (`idRoute`, `departure_city`, `arrival_city`, `departure_time`, `arrival_time`, `remaining_seats`, `carpooling`, `user`, `idCar`,`status`) VALUES
+	(1, 'Paris', 'Lyon', '2023-07-02 10:00:00', '2023-07-02 14:00:00', 2, 1, 11, 16, 'terminated'),
+	(2, 'Lyon', 'Paris', '2023-07-02 16:00:00', '2023-07-02 20:00:00', 4, 0, 12, 17, 'terminated'),
+	(3, 'Paris', 'Marseille', '2023-07-03 09:00:00', '2023-07-03 15:00:00', 3, 1, 13, 18, 'terminated'),
+	(4, 'Toulouse', 'Bordeaux', '2023-11-04 08:00:00', '2023-11-05 12:00:00', 1, 0, 14, 19, 'pending'),
+	(5, 'Marseille', 'Nice', '2023-07-05 10:00:00', '2023-07-05 15:00:00', 5, 1, 15, 20, 'pending');
 /*!40000 ALTER TABLE `travel` ENABLE KEYS */;
 
 

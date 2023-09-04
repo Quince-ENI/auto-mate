@@ -22,7 +22,7 @@ export const selectFilterRoutesFree = createSelector(selectFilterRoutes, selectS
 });
 
 export const selectUserRoutes = createSelector(selectRoutes, selectUser, (routes, user) =>
-  routes.filter(route => route.user === user.mail)
+  routes.filter(route => route.user === user.registration_number)
 );
 
 export const selectPendingRoutes = createSelector(selectRoutes, routes =>

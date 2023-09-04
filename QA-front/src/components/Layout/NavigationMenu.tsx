@@ -3,9 +3,9 @@ import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import jwt_decode from 'jwt-decode';
 import { FC, ReactNode } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-import { getToken } from '../../api/jwt';
+import { getToken, removeToken } from '../../api/jwt';
 import AutoMatelogo from '../../assets/AutoMateLogo';
 import { selectUserRole } from '../../state/selector/user.selector';
 
@@ -30,10 +30,21 @@ const NavigationMenu: FC = () => {
   const decodeJwt: { picture: string } = jwtToken ? jwt_decode(jwtToken) : { picture: '' };
   const userPicture = decodeJwt ? decodeJwt.picture : '';
   const userRole = useSelector(selectUserRole);
+  const navigate = useNavigate();
   const defaultItems: ItemType[] = [
     getItem(<Link to="/home">Accueil</Link>, 'home'),
     getItem(<Link to="/route">Mes Trajets</Link>, 'route'),
-    getItem(<Avatar size={48} src={userPicture} />, 'account')
+    getItem(
+      <Avatar
+        size={48}
+        src={userPicture}
+        onClick={() => {
+          removeToken();
+          navigate('/login');
+        }}
+      />,
+      'login'
+    )
   ];
 
   const adminItems: ItemType[] = [

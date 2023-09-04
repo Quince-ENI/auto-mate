@@ -12,7 +12,6 @@ public class User
     public string? first_name { get; set; }
     public string? mail { get; set; }
     public string? tel { get; set; }
-    public string? password { get; set; }
     public string? role { get; set; }
     public int idSite { get; set; }
     [ForeignKey("idSite")]
