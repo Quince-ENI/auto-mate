@@ -18,6 +18,7 @@ const columns = [
     key: 'departure_city'
   },
   {
+    // eslint-disable-next-line @typescript-eslint/quotes
     title: "Ville d'arrivée",
     dataIndex: 'arrival_city',
     key: 'arrival_city'

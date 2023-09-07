@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 using QA_back.Models;
 
 namespace QA_back
@@ -16,12 +20,12 @@ namespace QA_back
         //                            new MySqlServerVersion(new System.Version(10, 10, 2)));
         //    }
         //}
-
-        public DbSet<Car> Car { get; set; }
+        public DbSet<Car> Car { get; set; }  
         public DbSet<Key> Key { get; set; }    
         public DbSet<Site> Site { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<Travel> Travel { get; set; }
+        public DbSet<TravelUser> TravelUser { get; set; }
 
     }
 }

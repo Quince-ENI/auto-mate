@@ -1,0 +1,31 @@
+name: Deploy on Tag Release
+
+on:
+  push:
+    tags:
+      - 'G1R0C0' # Remplacez par le tag que vous souhaitez déployer
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to Docker Hub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and push Docker images
+        working-directory: ./prod
+        run: |
+          docker-compose -f docker-prod.yml build
+          docker-compose -f docker-prod.yml push
+
+      - name: Deploy with Docker Compose
+        working-directory: ./prod
+        run: |
+          docker-compose -f docker-prod.yml down
+          docker-compose -f docker-prod.yml up -d

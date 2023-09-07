@@ -6,8 +6,8 @@ export async function getRoutes(): Promise<Route[]> {
   return routes;
 }
 
-export async function createRoute(route: Partial<Route>): Promise<Route> {
-  const { data: routesResponse } = await apiClient.post<Route>('/api/Travel', route);
+export async function createRoute(route: Partial<Route>, userId: string): Promise<Route> {
+  const { data: routesResponse } = await apiClient.post<Route>(`/api/Travel?userId=${userId}`, route);
   return routesResponse;
   // return {
   //   user: 'co.cathelinais@gmail.com',

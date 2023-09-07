@@ -123,7 +123,7 @@ DELETE FROM `car`;
 /*!40000 ALTER TABLE `car` DISABLE KEYS */;
 INSERT INTO `car` (`idCar`, `Immatriculation`, `Type`, `Marque`, `Modele`, `Couleur`, `Nombre de Portes`, `Disponibilité`, `Nombre de Km`, `key`, `idSite`) VALUES
 	(16, 'ABC123', 'Berline', 'Renault', 'Clio', 'Rouge', 5, 1, 10000, 11, 1),
-	(17, 'DEF456', 'SUV', 'Peugeot', '3008', 'Blanc', 5, 0, 5000, 12, 1),
+	(17, 'DEF456', 'SUV', 'Peugeot', '3008', 'Blanc', 5, 1, 5000, 12, 1),
 	(18, 'GHI789', 'Berline', 'Citroen', 'C4', 'Bleu', 5, 1, 8000, 13, 1),
 	(19, 'JKL012', 'Citadine', 'Toyota', 'Yaris', 'Vert', 3, 1, 7000, 14, 4),
 	(20, 'MNO345', 'SUV', 'Nissan', 'Qashqai', 'Gris', 5, 1, 6000, 15, 5),
@@ -142,26 +142,47 @@ CREATE TABLE IF NOT EXISTS `travel` (
   `arrival_time` datetime DEFAULT NULL,
   `remaining_seats` int(11) NOT NULL DEFAULT 0,
   `carpooling` tinyint(4) NOT NULL DEFAULT 0,
-  `user` int(11) DEFAULT NULL,
   `idCar` int(11) DEFAULT NULL,
   `status` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`idRoute`) USING BTREE,
-  KEY `FK_route_user` (`user`),
   KEY `FK_route_car` (`idCar`),
-  CONSTRAINT `FK_route_car` FOREIGN KEY (`idCar`) REFERENCES `car` (`idCar`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `FK_route_user` FOREIGN KEY (`user`) REFERENCES `user` (`registration_number`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_route_car` FOREIGN KEY (`idCar`) REFERENCES `car` (`idCar`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Listage des données de la table automatebdd.travel : ~5 rows (environ)
 DELETE FROM `travel`;
 /*!40000 ALTER TABLE `travel` DISABLE KEYS */;
-INSERT INTO `travel` (`idRoute`, `departure_city`, `arrival_city`, `departure_time`, `arrival_time`, `remaining_seats`, `carpooling`, `user`, `idCar`,`status`) VALUES
-	(1, 'Paris', 'Lyon', '2023-07-02 10:00:00', '2023-07-02 14:00:00', 2, 1, 11, 16, 'terminated'),
-	(2, 'Lyon', 'Paris', '2023-07-02 16:00:00', '2023-07-02 20:00:00', 4, 0, 12, 17, 'terminated'),
-	(3, 'Paris', 'Marseille', '2023-07-03 09:00:00', '2023-07-03 15:00:00', 3, 1, 13, 18, 'terminated'),
-	(4, 'Toulouse', 'Bordeaux', '2023-11-04 08:00:00', '2023-11-05 12:00:00', 1, 0, 14, 19, 'pending'),
-	(5, 'Marseille', 'Nice', '2023-07-05 10:00:00', '2023-07-05 15:00:00', 5, 1, 15, 20, 'pending');
+INSERT INTO `travel` (`idRoute`, `departure_city`, `arrival_city`, `departure_time`, `arrival_time`, `remaining_seats`, `carpooling`, `idCar`,`status`) VALUES
+	(1, 'Paris', 'Lyon', '2023-07-02 10:00:00', '2023-07-02 14:00:00', 2, 1, 16, 'terminated'),
+	(2, 'Lyon', 'Paris', '2023-07-02 16:00:00', '2023-07-02 20:00:00', 4, 0,  17, 'terminated'),
+	(3, 'Paris', 'Marseille', '2023-07-03 09:00:00', '2023-07-03 15:00:00', 3, 1, 18, 'terminated'),
+	(4, 'Toulouse', 'Bordeaux', '2023-11-04 08:00:00', '2023-11-05 12:00:00', 1, 0, 19, 'pending'),
+	(5, 'Marseille', 'Nice', '2023-07-05 10:00:00', '2023-07-05 15:00:00', 5, 1, 20, 'pending');
 /*!40000 ALTER TABLE `travel` ENABLE KEYS */;
+
+-- Listage de la structure de la table automatebdd.travel_user
+DROP TABLE IF EXISTS `travel_user`;
+CREATE TABLE IF NOT EXISTS `travel_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `idRoute` int(11) NOT NULL,
+  `registration_number` int(7) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_travel_user_travel` (`idRoute`),
+  KEY `FK_travel_user_user` (`registration_number`),
+  CONSTRAINT `FK_travel_user_travel` FOREIGN KEY (`idRoute`) REFERENCES `travel` (`idRoute`) ON DELETE CASCADE ON UPDATE NO ACTION,
+  CONSTRAINT `FK_travel_user_user` FOREIGN KEY (`registration_number`) REFERENCES `user` (`registration_number`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
+-- Pour insérer des données dans la table de jointure
+/*!40000 ALTER TABLE `travel_user` DISABLE KEYS */;
+INSERT INTO `travel_user` (`idRoute`, `registration_number`) VALUES
+  (1, 11),
+  (2, 12),
+  (3, 13),
+  (4, 11),
+  (5, 15);
+/*!40000 ALTER TABLE `travel_user` ENABLE KEYS */;
 
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

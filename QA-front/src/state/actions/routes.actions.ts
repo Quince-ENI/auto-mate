@@ -6,5 +6,5 @@ export const getRoutesAsync = createAsyncThunk('autoMate/getRoutesAsync', () => 
 
 export const createRouteAsync = createAsyncThunk(
   'backoffice/createRouteAsync',
-  ({ route }: { route: Partial<Route> }) => createRoute(route)
+  ({ route, userId }: { route: Partial<Route>; userId: string }) => createRoute(route, userId)
 );

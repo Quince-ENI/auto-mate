@@ -70,10 +70,10 @@ const VehicleCard: React.FC<VehicleCardProps> = ({ car }) => {
             <strong>Nombre de portes:</strong> {car.nb_Portes}
           </p>
           <p>
-            <strong>Disponibilité:</strong> {car.disponibility ? 'Disponible' : 'Non disponible'}
+            <strong>Disponibilité:</strong> {car.disponibilité === 1 ? 'Disponible' : 'Non disponible'}
           </p>
           <p>
-            <strong>Kilomètres:</strong> {car.kilometers} km
+            <strong>Kilomètres:</strong> {car.nb_Km} km
           </p>
           <p>
             <strong>Site:</strong> {car.site.city}

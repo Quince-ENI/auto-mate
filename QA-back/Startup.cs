@@ -4,6 +4,8 @@ using Pomelo.EntityFrameworkCore.MySql;
 using Microsoft.OpenApi.Models;
 using System;
 using Microsoft.Extensions.Options;
+using System.Text.Json.Serialization;
+
 
 
 namespace QA_back
@@ -31,6 +33,12 @@ namespace QA_back
             services.AddDbContext<Context>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"),
                                         new MySqlServerVersion(new System.Version(10, 10, 2))));
+
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                // options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            });
             //options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
             // Ajoutez d'autres services ici

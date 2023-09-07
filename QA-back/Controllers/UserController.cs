@@ -23,20 +23,28 @@ public class UserController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<User>> GetUsers()
     {
-        return _context.User.Include(u => u.Site).ToList();
+        return _context.User.Include(u => u.Site).Include(u => u.TravelUsers)
+            .ThenInclude(ut => ut.Travel).ToList();
     }
 
     // GET: User/5
-    [HttpGet("Id/{registration_number}")]
-    public ActionResult<User> GetUser(int registration_number)
+   [HttpGet("{id}")]
+    public ActionResult<User> GetUser(int id)
     {
-        var user = _context.User.Find(registration_number);
+        var user = _context.User
+            .Include(u => u.Site)  // Inclut les données du site associé à l'utilisateur
+            .Include(u => u.TravelUsers)  // Inclut les données de la table de jointure
+            .ThenInclude(ut => ut.Travel)  // Inclut les données des trajets liés à l'utilisateur via la table de jointure
+            .SingleOrDefault(u => u.registration_number == id);  // Trouve l'utilisateur spécifique par son ID
+
         if (user == null)
         {
-            return NotFound();
+            return NotFound();  // Retourne un code d'état HTTP 404 si l'utilisateur n'est pas trouvé
         }
-        return user;
-    }
+
+        return Ok(user);  // Retourne l'utilisateur trouvé avec un code d'état HTTP 200
+}
+
 
     // GET: User/byEmail?mail=example@email.com
     [HttpGet("byEmail")]
