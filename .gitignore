@@ -7,3 +7,4 @@
 /QA-back/obj/Debug/net6.0/QA-back.assets.cache
 *.vsidx
 /QA-back/obj/Debug/net6.0/QA-back.GeneratedMSBuildEditorConfig.editorconfig
+*.env
