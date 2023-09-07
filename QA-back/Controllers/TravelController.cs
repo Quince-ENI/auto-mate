@@ -95,26 +95,34 @@ public class TravelController : ControllerBase
             return BadRequest();
         }
 
-        _context.Entry(travel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+        _context.Entry(travel).State = EntityState.Modified;
         _context.SaveChanges();
 
         return NoContent();
     }
 
-    // PUT: Travel/5
-    //[HttpPut("{id}")]
-    //public IActionResult ValidateTravel(int id, Travel travel)
-    //{
-    //    if (id != travel.idRoute)
-    //    {
-    //        return BadRequest();
-    //    }
+    // PUT: Travel/ValidateTravelStatus/5
+    [HttpPut("ValidateTravelStatus/{id}")]
+    public IActionResult ValidateTravel(int id)
+    {
+        var travel = _context.Travel.Find(id);
+        if (travel == null)
+        {
+            return NotFound();
+        }
 
-    //    _context.Entry(travel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-    //    _context.SaveChanges();
+        if (id != travel.idRoute)
+        {
+            return BadRequest();
+        }
 
-    //    return NoContent();
-    //}
+        travel.status = "validated";
+
+        _context.Entry(travel).State = EntityState.Modified;
+        _context.SaveChanges();
+
+        return NoContent();
+    }
 
     // POST: Travel
     [HttpPost]
