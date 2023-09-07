@@ -73,6 +73,7 @@ const VehiculeDisponibilityContainer: FC = () => {
                   departureCity={route.departure_city}
                   departure_time={route.departureHour}
                   remainingPlaces={route.remaining_seats}
+                  routeId={route.idRoute}
                 />
               ))}
           </Card>

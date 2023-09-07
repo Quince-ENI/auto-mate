@@ -86,7 +86,7 @@ DELETE FROM `user`;
 INSERT INTO `user` (`registration_number`, `name`, `first_name`, `mail`, `tel`, `role`, `idSite`) VALUES
 	(11, 'Cathelinais', 'Corentin', 'co.cathelinais@gmail.com', '1234567890', 'responsable', 1),
 	(12, 'Paugam', 'Pierre-Louis', 'paugam.pl@gmail.com', '9876543210', 'responsable', 1),
-	(13, 'Moreau', 'Jean', 'jean.moreau@mail.com', '2345678901', 'user', 1),
+	(13, 'Moreau', 'Jean', 'corentin.cathelinais@xait.com', '2345678901', 'user', 1),
 	(14, 'Roy', 'Julie', 'julie.roy@mail.com', '3456789012', 'responsable', 2),
 	(15, 'Lavoie', 'David', 'david.lavoie@mail.com', '4567890123', 'user', 2),
 	(16, 'Gauthier', 'Sophie', 'sophie.gauthier@mail.com', '5678901234', 'user', 2),

@@ -65,6 +65,7 @@ export interface TravelUse {
   registration_number: string;
 }
 export interface Route {
+  idRoute: string;
   user: string;
   status: Status;
   departure_city: string;

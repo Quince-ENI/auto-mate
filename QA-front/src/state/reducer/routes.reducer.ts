@@ -29,3 +29,24 @@ export function onCreateRouteAsyncFulfilled(
   state.entities.routes = [...state.entities.routes, routesResponse];
   state.ui.routesLoading = false;
 }
+
+export function onJoinRouteAsyncPending(state: AutoMateState): void {
+  state.ui.routesLoading = true;
+}
+
+export function onJoinRouteAsyncRejected(state: AutoMateState): void {
+  state.ui.routesLoading = true;
+}
+
+export function onJoinRouteAsyncFulfilled(
+  state: AutoMateState,
+  { payload: routesResponse }: FulfilledAction<Route>
+): void {
+  state.entities.routes = state.entities.routes.reduce((acc: Route[], route: Route) => {
+    if (route.idRoute === routesResponse.idRoute) {
+      return [...acc, routesResponse];
+    }
+    return [...acc, route];
+  }, []);
+  state.ui.routesLoading = false;
+}

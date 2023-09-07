@@ -106,17 +106,12 @@ public class TravelController : ControllerBase
     //     return NoContent();
     // }
 
-    [HttpPut("/AddUserToTravel/{userId}/{travelId}")]
-    public async Task<IActionResult> AddUserToTravel(int userId, int travelId)
+   [HttpPut("/AddUserToTravel/{userId}/{travelId}")]
+    public async Task<ActionResult<Travel>> AddUserToTravel(int userId, int travelId)
     {
-        Console.WriteLine("TEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSSSSSSSST");
-        Console.WriteLine(userId);
-        Console.WriteLine(travelId);
         // Trouver le trajet et l'utilisateur dans la base de données
-        var travel = _context.Travel.Find(travelId);
-        Console.WriteLine(travel);
-        var user = _context.User.Find(userId);
-        Console.WriteLine(user);
+        var travel = await _context.Travel.FindAsync(travelId);
+        var user = await _context.User.FindAsync(userId);
 
         if (travel == null || user == null)
         {
@@ -141,8 +136,8 @@ public class TravelController : ControllerBase
         // Créer la nouvelle relation dans la table de jointure
         var newTravelUser = new TravelUser
         {
-            idRoute = userId,
-            registration_number = travelId
+            idRoute = travelId,
+            registration_number = userId
         };
 
         // Diminuer le nombre de places disponibles
@@ -154,8 +149,15 @@ public class TravelController : ControllerBase
         // Sauvegarder les changements
         await _context.SaveChangesAsync();
 
-        return NoContent();
+        // Récupérer le trajet mis à jour, avec les relations nécessaires
+        var updatedTravel = await _context.Travel
+            .Include(t => t.Car).ThenInclude(c => c.Site)
+            .Include(t => t.TravelUsers).ThenInclude(tu => tu.User)
+            .SingleAsync(t => t.idRoute == travelId);
+
+        return Ok(updatedTravel);
     }
+
 
 
     // PUT: Travel/5
