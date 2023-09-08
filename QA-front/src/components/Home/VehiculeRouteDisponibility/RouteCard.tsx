@@ -1,6 +1,6 @@
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { styled } from 'styled-components';
@@ -8,7 +8,7 @@ import { joinRouteAsync } from '../../../state/actions/routes.actions';
 import { selectUser } from '../../../state/selector/user.selector';
 import { useAutoMateDispatch } from '../../../state/store';
 import { StyledCard, StyledGlobalContent } from './CarsCard';
-
+const { confirm } = Modal;
 export interface RouteCardProps {
   departureCity: string;
   arrivalCity: string;
@@ -64,9 +64,25 @@ const InfoContent = styled.p`
 const RouteCard: FC<RouteCardProps> = ({ departureCity, arrivalCity, remainingPlaces, departure_time, routeId }) => {
   const dispatch = useAutoMateDispatch();
   const { registration_number } = useSelector(selectUser);
-  const onJoinRoute = (): void => {
+  const joinRoute = (): void => {
     dispatch(joinRouteAsync({ routeId: routeId, userId: registration_number || '' }));
   };
+
+  type HandleShowConfirm = () => void;
+
+  const showConfirm: HandleShowConfirm = () => {
+    confirm({
+      title: 'Voulez-vous vraiment réserver une place sur ce trajet ?',
+      content: 'Cette demande est définitive',
+      onOk() {
+        joinRoute();
+      },
+      onCancel() {
+        console.log('Cancel');
+      }
+    });
+  };
+
   return (
     <StyledCard bodyStyle={{ overflow: 'auto' }}>
       <StyledGlobalContent>
@@ -87,7 +103,7 @@ const RouteCard: FC<RouteCardProps> = ({ departureCity, arrivalCity, remainingPl
             </CardItem>
           </DetailsContent>
         </Content>
-        <Button type="primary" onClick={onJoinRoute}>
+        <Button type="primary" onClick={showConfirm}>
           Réserver
         </Button>
       </StyledGlobalContent>
