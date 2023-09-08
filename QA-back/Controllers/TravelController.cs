@@ -118,7 +118,6 @@ public class TravelController : ControllerBase
             return NotFound();
         }
 
-        // Vérifier si l'utilisateur est déjà associé au trajet
         var existingTravelUser = await _context.TravelUser
             .FirstOrDefaultAsync(ut => ut.idRoute == travelId && ut.registration_number == userId);
 
@@ -158,22 +157,28 @@ public class TravelController : ControllerBase
         return Ok(updatedTravel);
     }
 
+    // PUT: Travel/ValidateTravelStatus/5
+    [HttpPut("ValidateTravelStatus/{id}")]
+    public IActionResult ValidateTravel(int id)
+    {
+        var travel = _context.Travel.Find(id);
+        if (travel == null)
+        {
+            return NotFound();
+        }
 
+        if (id != travel.idRoute)
+        {
+            return BadRequest();
+        }
 
-    // PUT: Travel/5
-    //[HttpPut("{id}")]
-    //public IActionResult ValidateTravel(int id, Travel travel)
-    //{
-    //    if (id != travel.idRoute)
-    //    {
-    //        return BadRequest();
-    //    }
+        travel.status = "validated";
 
-    //    _context.Entry(travel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-    //    _context.SaveChanges();
+        _context.Entry(travel).State = EntityState.Modified;
+        _context.SaveChanges();
 
-    //    return NoContent();
-    //}
+        return NoContent();
+    }
 
     // POST: Travel
  [HttpPost]
