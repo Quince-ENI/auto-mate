@@ -37,25 +37,25 @@ function useCarForm(
   const dispatch = useAutoMateDispatch();
   const [form] = Form.useForm();
   const user = useSelector(selectUser);
+  const userId = user.registration_number ? user.registration_number : '';
   const handleSubmitForm = useCallback(
     (values: UseCarFormValues): void => {
       dispatch(
         createRouteAsync({
           route: {
-            user: user.registration_number,
             departure_city: departureCity,
             arrival_city: values.destination,
             departure_time: departureDate ? departureDate.toDate() : new Date(),
             arrival_time: returnDate ? returnDate.toDate() : new Date(),
             remaining_seats: car.nb_Portes,
             status: 'pending',
-            idCar: car.idCar,
-            car: car
-          }
+            idCar: car.idCar
+          },
+          userId: userId || ''
         })
       );
     },
-    [car, departureCity, departureDate, dispatch, returnDate, user.registration_number]
+    [car.idCar, car.nb_Portes, departureCity, departureDate, dispatch, returnDate, userId]
   );
   return { form, handleSubmitForm };
 }

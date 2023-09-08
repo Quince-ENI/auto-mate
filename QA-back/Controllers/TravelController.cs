@@ -22,7 +22,12 @@ public class TravelController : ControllerBase
     [HttpGet]
     public ActionResult<IEnumerable<Travel>> GetTravels()
     {
-        return _context.Travel.Include(t => t.Car).ThenInclude(c => c.Site).ToList();
+        return _context.Travel
+            .Include(t => t.Car)
+                .ThenInclude(c => c.Site)
+            .Include(t => t.TravelUsers)
+                .ThenInclude(tu => tu.User)
+        .ToList();
     }
 
     // GET: Travel/5
@@ -62,17 +67,17 @@ public class TravelController : ControllerBase
         return carpoolingTravels;
     }
 
-    // GET: Travel/User/5
-    [HttpGet("UserTravels")]
-    public ActionResult<IEnumerable<Travel>> GetUserTravels(int id)
-    {
-        var userTravels = _context.Travel.Where(t => t.user == id).ToList();
-        if (userTravels == null)
-        {
-            return NotFound();
-        }
-        return userTravels;
-    }
+    // // GET: Travel/User/5
+    // [HttpGet("UserTravels")]
+    // public ActionResult<IEnumerable<Travel>> GetUserTravels(int id)
+    // {
+    //     var userTravels = _context.Travel.Where(t => t.user == id).ToList();
+    //     if (userTravels == null)
+    //     {
+    //         return NotFound();
+    //     }
+    //     return userTravels;
+    // }
 
     // GET: Travel/Site/
     [HttpGet("SiteTravels")]
@@ -86,19 +91,70 @@ public class TravelController : ControllerBase
         return siteTravels;
     }
 
-    // PUT: Travel/5
-    [HttpPut("{id}")]
-    public IActionResult UpdateTravel(int id, Travel travel)
+    // // PUT: Travel/5
+    // [HttpPut("{id}")]
+    // public IActionResult UpdateTravel(int id, Travel travel)
+    // {
+    //     if (id != travel.idRoute)
+    //     {
+    //         return BadRequest();
+    //     }
+
+    //     _context.Entry(travel).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+    //     _context.SaveChanges();
+
+    //     return NoContent();
+    // }
+
+   [HttpPut("/AddUserToTravel/{userId}/{travelId}")]
+    public async Task<ActionResult<Travel>> AddUserToTravel(int userId, int travelId)
     {
-        if (id != travel.idRoute)
+        // Trouver le trajet et l'utilisateur dans la base de données
+        var travel = await _context.Travel.FindAsync(travelId);
+        var user = await _context.User.FindAsync(userId);
+
+        if (travel == null || user == null)
         {
-            return BadRequest();
+            return NotFound();
         }
 
-        _context.Entry(travel).State = EntityState.Modified;
-        _context.SaveChanges();
+        var existingTravelUser = await _context.TravelUser
+            .FirstOrDefaultAsync(ut => ut.idRoute == travelId && ut.registration_number == userId);
 
-        return NoContent();
+        if (existingTravelUser != null)
+        {
+            return BadRequest("The user is already added to the travel.");
+        }
+
+        // Vérifier si des places sont encore disponibles
+        if (travel.remaining_seats <= 0)
+        {
+            return BadRequest("No remaining seats available.");
+        }
+
+        // Créer la nouvelle relation dans la table de jointure
+        var newTravelUser = new TravelUser
+        {
+            idRoute = travelId,
+            registration_number = userId
+        };
+
+        // Diminuer le nombre de places disponibles
+        travel.remaining_seats--;
+
+        // Ajouter la nouvelle relation à la table de jointure
+        await _context.TravelUser.AddAsync(newTravelUser);
+
+        // Sauvegarder les changements
+        await _context.SaveChangesAsync();
+
+        // Récupérer le trajet mis à jour, avec les relations nécessaires
+        var updatedTravel = await _context.Travel
+            .Include(t => t.Car).ThenInclude(c => c.Site)
+            .Include(t => t.TravelUsers).ThenInclude(tu => tu.User)
+            .SingleAsync(t => t.idRoute == travelId);
+
+        return Ok(updatedTravel);
     }
 
     // PUT: Travel/ValidateTravelStatus/5
@@ -125,18 +181,51 @@ public class TravelController : ControllerBase
     }
 
     // POST: Travel
-    [HttpPost]
-    public ActionResult<Travel> CreateTravel(Travel travel, int carId)
-    {
-        var car = _context.Car.Find(carId);
-        travel.Car = car;
-        _context.Travel.Add(travel);
-        _context.SaveChanges();
+ [HttpPost]
+  public ActionResult<Travel> CreateTravel(Travel travel, int userId)
+  {
+      // Trouver la voiture et l'utilisateur dans la base de données
+      var car = _context.Car.Find(travel.idCar);
+      var user = _context.User.Find(userId);
 
-        var loadedTravel = _context.Travel.Include(t => t.Car).ThenInclude(c => c.Site).Single(t => t.idRoute == travel.idRoute);
+      // Vérifier si la voiture ou l'utilisateur n'existe pas
+      if (car == null || user == null)
+      {
+          return NotFound("Car or User not found");
+      }
 
-        return CreatedAtAction(nameof(GetTravel), new { id = loadedTravel.idRoute }, loadedTravel);
-    }
+      // Associer la voiture au trajet
+      travel.Car = car;
+
+      // Ajouter le trajet à la base de données
+      _context.Travel.Add(travel);
+
+      // Sauvegarder les changements pour obtenir l'ID généré pour le trajet
+      _context.SaveChanges();
+
+      // Utiliser l'ID généré pour créer la relation dans la table de jointure
+      var travelUser = new TravelUser
+      {
+          idRoute = travel.idRoute, // ici, idRoute est l'ID généré
+          registration_number = userId // ou tout autre identifiant que vous utilisez pour User
+      };
+
+      // Ajouter cette relation à la base de données
+      _context.TravelUser.Add(travelUser);
+
+      // Sauvegarder à nouveau les changements
+      _context.SaveChanges();
+
+      // Charger le trajet créé, avec toutes les relations nécessaires
+      var loadedTravel = _context.Travel
+          .Include(t => t.Car).ThenInclude(c => c.Site)
+          .Include(t => t.TravelUsers).ThenInclude(tu => tu.User)
+          .Single(t => t.idRoute == travel.idRoute);
+
+      return CreatedAtAction(nameof(GetTravel), new { id = loadedTravel.idRoute }, loadedTravel);
+  }
+
+
 
     // DELETE: Travel/5
     [HttpDelete("{id}")]

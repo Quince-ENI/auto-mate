@@ -22,7 +22,10 @@ export const selectFilterRoutesFree = createSelector(selectFilterRoutes, selectS
 });
 
 export const selectUserRoutes = createSelector(selectRoutes, selectUser, (routes, user) =>
-  routes.filter(route => route.user === user.registration_number)
+  routes.filter(route => {
+    const registration_numbers = route.travelUsers.map(r => r.registration_number);
+    return user.registration_number && registration_numbers.includes(user.registration_number);
+  })
 );
 
 export const selectPendingRoutes = createSelector(selectRoutes, routes =>

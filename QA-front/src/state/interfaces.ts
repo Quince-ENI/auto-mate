@@ -54,12 +54,18 @@ export interface Car {
   modele: string;
   couleur: string;
   nb_Portes: number;
-  disponibility: boolean;
-  kilometers: number;
+  disponibilité: number;
+  nb_Km: number;
   site: Site;
 }
 
+export interface TravelUse {
+  id: number;
+  idRoute: number;
+  registration_number: string;
+}
 export interface Route {
+  idRoute: string;
   user: string;
   status: Status;
   departure_city: string;
@@ -70,4 +76,5 @@ export interface Route {
   arrival_time: Date;
   idCar: string;
   car: Car;
+  travelUsers: TravelUse[];
 }
